@@ -8,6 +8,7 @@ ACCENTS = {
     "dashgov": "#00695C",
     "dashingest": "#EF6C00",
     "dashml": "#283593",
+    "dashobserve": "#B71C1C",
     "default": "#1B3A4B",
 }
 
