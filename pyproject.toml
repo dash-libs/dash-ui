@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dash-ui"
+version = "0.1.0"
+description = "Shared ipywidgets component library for the Dashlibs suite"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Darshan Shah", email = "darshan.innovation@icloud.com" }]
+keywords = ["databricks", "ipywidgets", "ui", "components"]
+dependencies = ["ipywidgets>=8.0"]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "hatch", "pdoc", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/dash-libs/dash-ui"
