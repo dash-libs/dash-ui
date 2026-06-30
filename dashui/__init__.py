@@ -17,7 +17,7 @@ from dashui.components import (
 from dashui.schema import list_columns, list_columns_safe
 from dashui.theme import accent
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = [
     "SourceSelector",
     "action_button",
