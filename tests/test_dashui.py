@@ -47,10 +47,21 @@ def test_source_selector_switches_box_on_toggle():
 
 
 def test_card_wraps_children():
+    # card() injects a one-time global <style> block ahead of the first
+    # children on the very first call in a process, so we only assert that
+    # our widget made it in, not exact position/count.
     import dashui
     h = dashui.header("X")
     c = dashui.card([h])
-    assert list(c.children) == [h]
+    assert h in c.children
+    assert "dashui-card" in c._dom_classes
+
+
+def test_action_button_has_variant_class():
+    import dashui
+    btn = dashui.action_button("Run", style="success", emoji="▶")
+    assert "▶ Run" == btn.description
+    assert "dashui-btn-success" in btn._dom_classes
 
 
 def test_running_list_renders_items():
