@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "dash-ui"
+name = "dash-uis"
 dynamic = ["version"]
 description = "Shared ipywidgets component library for the Dashlibs suite"
 readme = "README.md"

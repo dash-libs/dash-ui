@@ -8,7 +8,7 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install dash-ui
+# MAGIC %pip install dash-uis
 
 # COMMAND ----------
 

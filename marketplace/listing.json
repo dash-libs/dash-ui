@@ -1,13 +1,13 @@
 {
   "listing_name": "DashUI — Shared UI Components",
-  "pypi_package": "dash-ui",
+  "pypi_package": "dash-uis",
   "short_description": "Shared ipywidgets components for every Dashlibs notebook UI — headers, source pickers, output panels, schema helpers.",
-  "long_description": "Part of the Dashlibs suite for Databricks. Provides reusable ipywidgets building blocks consumed by dash-dq, dash-synthetic, dash-relate and other dash-* packages so every notebook UI looks and behaves consistently. Install with %pip install dash-ui.",
+  "long_description": "Part of the Dashlibs suite for Databricks. Provides reusable ipywidgets building blocks consumed by dash-dq, dash-synthetic, dash-relate and other dash-* packages so every notebook UI looks and behaves consistently. Install with %pip install dash-uis (PyPI distribution name; the importable module is dashui).",
   "categories": ["Developer Tools", "Data Engineering"],
   "provider": "dash-libs",
   "source_url": "https://github.com/dash-libs/dash-ui",
   "documentation_url": "https://github.com/dash-libs/dash-ui/tree/main/docs/api",
   "license": "Apache-2.0",
   "supported_platforms": ["Databricks Runtime 12.x+"],
-  "install_instructions": "%pip install dash-ui"
+  "install_instructions": "%pip install dash-uis"
 }

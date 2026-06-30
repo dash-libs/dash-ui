@@ -124,7 +124,7 @@ jobs:
 
           ### Install
           \`\`\`bash
-          pip install dash-ui==${VERSION}
+          pip install dash-uis==${VERSION}
           \`\`\`
           EOF
 
@@ -161,7 +161,7 @@ jobs:
       id-token: write   # required for OIDC trusted publisher
     environment:
       name: pypi
-      url: https://pypi.org/project/dash-ui
+      url: https://pypi.org/project/dash-uis
     steps:
       - name: Download dist
         uses: actions/download-artifact@v4
@@ -203,7 +203,7 @@ jobs:
           # MAGIC Install and use shared components in any dash-* notebook UI.
 
           # COMMAND ----------
-          # MAGIC %pip install dash-ui==${VERSION}
+          # MAGIC %pip install dash-uis==${VERSION}
 
           # COMMAND ----------
           dbutils.library.restartPython()
@@ -224,7 +224,7 @@ jobs:
             "provider": "dash-libs",
             "documentation_url": "https://github.com/dash-libs/dash-ui",
             "source_url": "https://github.com/dash-libs/dash-ui",
-            "pypi_package": "dash-ui==${VERSION}"
+            "pypi_package": "dash-uis==${VERSION}"
           }
           LEOF
 

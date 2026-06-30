@@ -1,7 +1,7 @@
 # DashUI — Databricks Library
 
 [![CI](https://github.com/dash-libs/dash-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/dash-libs/dash-ui/actions)
-[![PyPI](https://img.shields.io/pypi/v/dash-ui)](https://pypi.org/project/dash-ui/)
+[![PyPI](https://img.shields.io/pypi/v/dash-uis)](https://pypi.org/project/dash-uis/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
 Part of the **[Dashlibs](https://github.com/dash-libs)** suite — Databricks libraries built for business users.
@@ -14,8 +14,11 @@ schema introspection helpers.
 ## Installation
 
 ```bash
-%pip install dash-ui
+%pip install dash-uis
 ```
+
+> Note: the PyPI distribution is named `dash-uis` (the name `dash-ui` was
+> already taken by an unrelated package). The importable module is still `dashui`.
 
 ## Usage
 
