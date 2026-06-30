@@ -1,10 +1,10 @@
-## DashUI v0.1.2
+## DashUI v0.1.3
 
 **Released:** 2026-06-30
-**Previous:** v0.1.1
+**Previous:** v0.1.2
 
 ### Notes
-Renamed PyPI distribution to dash-uis (dash-ui was already taken)
+Visual redesign, repo hygiene
 
 ### What's included
 - All tests passing across Python 3.9, 3.10, 3.11, 3.12
@@ -13,5 +13,5 @@ Renamed PyPI distribution to dash-uis (dash-ui was already taken)
 
 ### Install
 ```bash
-pip install dash-uis==0.1.2
+pip install dash-uis==0.1.3
 ```
