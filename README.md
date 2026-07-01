@@ -159,6 +159,17 @@ the system: `dashui.PRIMARY`, `dashui.SUCCESS`, `dashui.DANGER`, `dashui.WARNING
 | dash-relate | Ontology & Lineage for AI |
 | dash-ui | Shared UI components (PyPI: `dash-uis`) |
 
+## Quality & Contributing
+
+- 10 unit tests, zero Spark dependency to run them — `pytest tests/ -v`
+- Lint-clean (`ruff check dashui/`), PEP 561 typed (`py.typed`)
+- Every change ships through a reviewed pull request; CI (lint → test on
+  Python 3.9–3.12 → build) gates every PR and every release
+- See [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup,
+  [CHANGELOG.md](CHANGELOG.md) for release history,
+  [SECURITY.md](SECURITY.md) to report a vulnerability, and
+  [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+
 ## License
 
 Apache 2.0
