@@ -1,23 +1,31 @@
 """
 Reusable ipywidgets building blocks shared across Dashlibs notebook UIs.
-Visually modeled on the datapal-access Databricks App (IBM Plex Sans, teal
-primary, rounded-lg cards with a soft shadow) — translated into the CSS
-ipywidgets can actually render inside a notebook output cell.
+Visually modeled on Databricks' own product UI (Inter, Lava-red primary
+reserved for primary actions, small-radius neutral cards, dense tabular
+forms) — translated into the CSS ipywidgets can actually render inside a
+notebook output cell. See theme.py's docstring for sourcing notes.
 """
 from __future__ import annotations
 from dataclasses import dataclass
 
 from dashui.theme import (
+    ACCENT_BG,
+    ACCENT_FG,
     BORDER,
+    BORDER_STRONG,
     CARD,
     DANGER,
     FONT_IMPORT_URL,
+    FONT_MONO,
     FONT_SANS,
+    FONT_SIZE_BASE,
     MUTED,
     MUTED_FOREGROUND,
     PRIMARY,
+    PRIMARY_HOVER,
     RADIUS_LG,
     RADIUS_MD,
+    RADIUS_SM,
     SHADOW_SM,
     SUCCESS,
     WARNING,
@@ -27,13 +35,13 @@ from dashui.theme import (
 _STYLE_INJECTED = False
 
 _BUTTON_VARIANTS = {
-    # button_style name -> (background, text color, hover background)
-    "primary": (PRIMARY, "#FFFFFF", "#23867B"),
-    "success": (SUCCESS, "#FFFFFF", "#228758"),
-    "warning": (WARNING, "#FFFFFF", "#D88A00"),
-    "danger": (DANGER, "#FFFFFF", "#BD2222"),
-    "info": (MUTED, "#131720", "#E4E7EB"),
-    "": (MUTED, "#131720", "#E4E7EB"),
+    # button_style name -> (background, text color, hover background, border)
+    "primary": (PRIMARY, "#FFFFFF", PRIMARY_HOVER, PRIMARY),
+    "success": (SUCCESS, "#FFFFFF", "#256628", SUCCESS),
+    "warning": (WARNING, "#FFFFFF", "#8F5600", WARNING),
+    "danger": (DANGER, "#FFFFFF", "#A02020", DANGER),
+    "info": (CARD, "#1B3139", MUTED, BORDER_STRONG),
+    "": (CARD, "#1B3139", MUTED, BORDER_STRONG),
 }
 
 
@@ -51,20 +59,25 @@ def html(text: str):
 
 
 def _global_style():
-    """The shared <style> block (fonts, card shell, button variants, output panel)."""
+    """The shared <style> block (fonts, card shell, inputs, tabs, table, button variants)."""
     btn_css = "\n".join(
         f".dashui-btn-{name or 'default'}.widget-button {{ "
-        f"background:{bg} !important; color:{fg} !important; border:none !important; "
-        f"border-radius:{RADIUS_MD} !important; font-weight:600 !important; "
-        f"font-family:{FONT_SANS} !important; transition:background-color .15s ease; }}\n"
-        f".dashui-btn-{name or 'default'}.widget-button:hover {{ background:{hover} !important; }}"
-        for name, (bg, fg, hover) in _BUTTON_VARIANTS.items()
+        f"background:{bg} !important; color:{fg} !important; "
+        f"border:1px solid {border} !important; "
+        f"border-radius:{RADIUS_MD} !important; font-weight:500 !important; font-size:{FONT_SIZE_BASE} !important; "
+        f"font-family:{FONT_SANS} !important; height:32px !important; box-shadow:none !important; "
+        f"transition:background-color .12s ease, border-color .12s ease; }}\n"
+        f".dashui-btn-{name or 'default'}.widget-button:hover {{ background:{hover} !important; border-color:{hover} !important; }}"
+        for name, (bg, fg, hover, border) in _BUTTON_VARIANTS.items()
         if name
     )
     return html(f"""
 <style>
 @import url('{FONT_IMPORT_URL}');
-.dashui-root, .dashui-root * {{ font-family: {FONT_SANS} !important; }}
+
+.dashui-root, .dashui-root * {{ font-family: {FONT_SANS} !important; font-size: {FONT_SIZE_BASE}; color: #1B3139; }}
+
+/* ── Card shell ─────────────────────────────────────────────────────── */
 .dashui-card {{
     background: {CARD};
     border: 1px solid {BORDER};
@@ -85,7 +98,88 @@ def _global_style():
     background: {MUTED};
     border: 1px solid {BORDER};
     border-radius: {RADIUS_MD};
+    font-size: {FONT_SIZE_BASE};
 }}
+
+/* ── Form inputs — flat, bordered, small radius, Lava focus ring ──────── */
+.dashui-root input[type="text"], .dashui-root input[type="password"],
+.dashui-root input[type="number"], .dashui-root textarea, .dashui-root select {{
+    border: 1px solid {BORDER_STRONG} !important;
+    border-radius: {RADIUS_SM} !important;
+    background: {CARD} !important;
+    font-size: {FONT_SIZE_BASE} !important;
+    padding: 4px 8px !important;
+    box-shadow: none !important;
+    transition: border-color .12s ease, box-shadow .12s ease;
+}}
+.dashui-root input[type="text"]:focus, .dashui-root input[type="password"]:focus,
+.dashui-root input[type="number"]:focus, .dashui-root textarea:focus, .dashui-root select:focus {{
+    border-color: {PRIMARY} !important;
+    box-shadow: 0 0 0 2px {ACCENT_BG} !important;
+    outline: none !important;
+}}
+.dashui-root input[type="checkbox"] {{ accent-color: {PRIMARY}; }}
+.dashui-root .widget-label {{ font-size: {FONT_SIZE_BASE} !important; color: #1B3139 !important; font-weight: 500; }}
+
+/* ── ToggleButtons — segmented control, filled-when-selected ─────────── */
+.dashui-root .widget-toggle-buttons .widget-toggle-button {{
+    border: 1px solid {BORDER_STRONG} !important;
+    background: {CARD} !important;
+    color: #1B3139 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: {FONT_SIZE_BASE} !important;
+    font-weight: 500 !important;
+}}
+.dashui-root .widget-toggle-buttons .widget-toggle-button:first-child {{ border-radius: {RADIUS_SM} 0 0 {RADIUS_SM} !important; }}
+.dashui-root .widget-toggle-buttons .widget-toggle-button:last-child {{ border-radius: 0 {RADIUS_SM} {RADIUS_SM} 0 !important; }}
+.dashui-root .widget-toggle-buttons .mod-active {{
+    background: {ACCENT_BG} !important;
+    border-color: {PRIMARY} !important;
+    color: {ACCENT_FG} !important;
+    font-weight: 600 !important;
+}}
+
+/* ── Tabs — underline style, matching the Databricks workspace nav ────── */
+.dashui-root .widget-tab > .p-TabBar, .dashui-root .widget-tab > .lm-TabBar {{
+    border-bottom: 1px solid {BORDER} !important;
+}}
+.dashui-root .p-TabBar-tab, .dashui-root .lm-TabBar-tab {{
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    color: {MUTED_FOREGROUND} !important;
+    font-size: {FONT_SIZE_BASE} !important;
+    font-weight: 500 !important;
+    padding: 8px 14px !important;
+}}
+.dashui-root .p-TabBar-tab.p-mod-current, .dashui-root .lm-TabBar-tab.lm-mod-current {{
+    color: {PRIMARY} !important;
+    border-bottom: 2px solid {PRIMARY} !important;
+    font-weight: 600 !important;
+}}
+.dashui-root .widget-tab-contents {{ border: none !important; padding-top: 12px !important; }}
+
+/* ── Editable table — Databricks "parameters" table pattern ───────────── */
+.dashui-table {{ border: 1px solid {BORDER}; border-radius: {RADIUS_MD}; overflow: hidden; }}
+.dashui-table-row {{
+    border-bottom: 1px solid {BORDER};
+    padding: 4px 8px;
+    align-items: center;
+}}
+.dashui-table-row:last-child {{ border-bottom: none; }}
+.dashui-table-row:hover {{ background: {MUTED}; }}
+.dashui-table-header {{
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: {MUTED_FOREGROUND};
+    background: {MUTED};
+    padding: 6px 8px;
+}}
+.dashui-mono {{ font-family: {FONT_MONO} !important; font-size: 12px !important; }}
+
 {btn_css}
 </style>
 """)
@@ -116,7 +210,7 @@ def status_line(text: str, kind: str = "info"):
     return html(f"<span style='color:{color};font-family:{FONT_SANS}'>{prefix} {text}</span>")
 
 
-def card(children, padding: str = "20px"):
+def card(children, padding: str = "16px"):
     """Bordered, shadowed VBox container — the outer shell for every launch() UI."""
     w = _require_widgets()
     global _STYLE_INJECTED
@@ -191,10 +285,10 @@ def source_selector(label: str = "Source:") -> SourceSelector:
 
 
 def action_button(text: str, style: str = "primary", emoji: str = ""):
-    """style in primary|success|warning|danger|info — matches the datapal-access button variants."""
+    """style in primary|success|warning|danger|info — matches the Databricks button variants."""
     w = _require_widgets()
     label = f"{emoji} {text}".strip()
-    btn = w.Button(description=label, layout=w.Layout(height="40px", padding="0 16px"))
+    btn = w.Button(description=label, layout=w.Layout(height="32px", padding="0 14px", width="auto"))
     btn.add_class(f"dashui-btn-{style or 'default'}")
     return btn
 
@@ -229,3 +323,67 @@ def running_list(formatter):
                 print(formatter(i, item))
 
     return out, render
+
+
+@dataclass
+class EditableTable:
+    """
+    An add/remove-row key-value grid — the pattern Databricks itself uses for
+    job parameters, cluster tags, and environment variables, instead of a
+    single free-text "key=value, key=value" field.
+
+    Usage::
+        tbl = editable_table(["Key", "Value"], placeholders={"Key": "AWS_REGION"})
+        ui = card([tbl.widget, ...])
+        rows = tbl.values()  # [{"Key": "AWS_REGION", "Value": "us-east-1"}, ...]
+    """
+    widget: object
+    add_row: object   # callable(b=None) -> None, wired as a Button.on_click handler too
+    values: object     # callable() -> list[dict[str, str]]
+
+
+def editable_table(columns: list[str], placeholders: dict[str, str] | None = None, initial_rows: int = 1) -> EditableTable:
+    w = _require_widgets()
+    placeholders = placeholders or {}
+    row_entries: list[tuple[object, dict]] = []  # (row_box, {col: Text widget})
+
+    header_row = w.HBox(
+        [w.HTML(f"<div class='dashui-table-header'>{col}</div>") for col in columns] + [w.HTML("", layout=w.Layout(width="32px"))]
+    )
+    rows_box = w.VBox([])
+
+    def _make_row():
+        cells = {col: w.Text(placeholder=placeholders.get(col, ""), layout=w.Layout(width="auto", flex="1")) for col in columns}
+        remove_btn = w.Button(description="✕", layout=w.Layout(width="32px", height="28px"), tooltip="Remove row")
+        remove_btn.add_class("dashui-btn-info")
+        row_box = w.HBox([cells[c] for c in columns] + [remove_btn])
+        row_box.add_class("dashui-table-row")
+
+        def on_remove(_b):
+            row_entries[:] = [(rb, c) for rb, c in row_entries if rb is not row_box]
+            rows_box.children = tuple(rb for rb, _ in row_entries)
+
+        remove_btn.on_click(on_remove)
+        return row_box, cells
+
+    def add_row(_b=None):
+        row_box, cells = _make_row()
+        row_entries.append((row_box, cells))
+        rows_box.children = tuple(rb for rb, _ in row_entries)
+
+    for _ in range(initial_rows):
+        add_row()
+
+    add_btn = action_button("Add row", style="info", emoji="＋")
+    add_btn.on_click(add_row)
+
+    def values() -> list[dict]:
+        return [
+            {col: cells[col].value.strip() for col in columns}
+            for _, cells in row_entries
+            if any(cells[col].value.strip() for col in columns)
+        ]
+
+    table = w.VBox([header_row, rows_box, add_btn])
+    table.add_class("dashui-table")
+    return EditableTable(widget=table, add_row=add_row, values=values)

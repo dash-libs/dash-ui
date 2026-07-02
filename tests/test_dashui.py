@@ -8,16 +8,17 @@ def test_import():
 
 
 def test_accent_known_and_default():
-    from dashui.theme import accent
-    assert accent("dashsynthetic") == "#7B1FA2"
+    from dashui.theme import ACCENTS, accent
+    assert accent("dashsynthetic") == ACCENTS["dashsynthetic"]
     assert accent("totally-unknown-lib") == accent("default")
 
 
 def test_header_returns_widget():
     import dashui
+    from dashui.theme import ACCENTS
     h = dashui.header("Title", library="dashsynthetic", emoji="🧬")
     assert "Title" in h.value
-    assert "7B1FA2" in h.value
+    assert ACCENTS["dashsynthetic"].lstrip("#") in h.value
 
 
 def test_status_line_kinds():
@@ -77,3 +78,36 @@ def test_running_list_renders_items():
 def test_list_columns_safe_without_spark_returns_empty():
     from dashui.schema import list_columns_safe
     assert list_columns_safe("catalog.schema.nonexistent") == []
+
+
+def test_editable_table_starts_with_one_row_by_default():
+    import dashui
+    tbl = dashui.editable_table(["Key", "Value"])
+    assert len(tbl.widget.children[1].children) == 1  # rows_box is the 2nd child, after the header row
+
+
+def test_editable_table_add_row_appends():
+    import dashui
+    tbl = dashui.editable_table(["Key", "Value"], initial_rows=0)
+    assert len(tbl.widget.children[1].children) == 0
+    tbl.add_row()
+    tbl.add_row()
+    assert len(tbl.widget.children[1].children) == 2
+
+
+def test_editable_table_values_reads_filled_rows():
+    import dashui
+    tbl = dashui.editable_table(["Key", "Value"], initial_rows=2)
+    row0, row1 = tbl.widget.children[1].children
+    row0.children[0].value = "region"
+    row0.children[1].value = "us-east-1"
+    assert tbl.values() == [{"Key": "region", "Value": "us-east-1"}]
+
+
+def test_editable_table_remove_row_button():
+    import dashui
+    tbl = dashui.editable_table(["Key", "Value"], initial_rows=2)
+    first_row = tbl.widget.children[1].children[0]
+    remove_btn = first_row.children[-1]
+    remove_btn.click()
+    assert len(tbl.widget.children[1].children) == 1

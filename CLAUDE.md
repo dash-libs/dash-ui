@@ -11,11 +11,22 @@ behaves consistently. components.py=widgets (header/source_selector/output_panel
 theme.py=design tokens (per-library accent colors + the shared neutral palette),
 schema.py=UC column introspection.
 
-Visual design is modeled on the **datapal-access** Databricks App
-(`~/datapal-access` — React + Tailwind + shadcn/ui): IBM Plex Sans, a teal
-primary (`#2A9D90`), `rounded-lg` cards with a soft shadow. Tokens were
-extracted from `src/index.css` / `tailwind.config.ts` there. If that app's
-design system changes, re-extract rather than guessing new values.
+**Visual design changed 2026-07-02**: repointed from the datapal-access
+Databricks App to Databricks' own product UI (Inter, "Lava" red-orange
+`#FF3621` reserved for primary actions only, small 3-6px radii, dense
+13px-base forms, underline-style tabs, bordered/hoverable tables) —
+explicit user direction ("closer to Databricks native UI", "more tabular
+style configs"). Not a pixel-exact extraction (no live workspace to sample
+from in this environment) — see theme.py's docstring for what it's
+actually grounded in. If you have reference screenshots of the real
+Databricks workspace UI, treat those as higher-authority than the current
+tokens and re-derive.
+
+New: `editable_table()` in components.py — an add/remove-row key-value
+grid (Databricks' own pattern for job parameters / cluster tags / env
+vars), for any config that's naturally tabular instead of a free-text
+"key=value, key=value" field. Prefer this over a Textarea whenever a
+dash-* UI needs a variable-length list of key/value pairs.
 
 PyPI distribution name is **`dash-uis`** (`dash-ui` was taken by an
 unrelated package) — the import name (`dashui`) is unaffected. Don't
