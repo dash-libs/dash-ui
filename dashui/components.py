@@ -186,15 +186,18 @@ def _global_style():
 
 
 def header(title: str, library: str = "default", emoji: str = "", subtitle: str = ""):
-    """Top banner used at the start of every launch() UI."""
+    """Top banner used at the start of every launch() UI. `emoji` is kept for
+    API compatibility but not used by any dash-* package — Databricks' own
+    page headers are plain text, no decorative glyph."""
     color = accent(library)
+    prefix = f"{emoji} " if emoji else ""
     sub = (
         f"<div style='font-size:12px;color:{MUTED_FOREGROUND};margin-top:2px;"
         f"font-family:{FONT_SANS}'>{subtitle}</div>"
     ) if subtitle else ""
     return html(
         f"<h2 style='color:{color};margin-bottom:0;font-weight:700;"
-        f"letter-spacing:-0.01em;font-family:{FONT_SANS}'>{emoji} {title}</h2>{sub}"
+        f"letter-spacing:-0.01em;font-family:{FONT_SANS}'>{prefix}{title}</h2>{sub}"
     )
 
 
@@ -204,10 +207,15 @@ def section(title: str):
 
 
 def status_line(text: str, kind: str = "info"):
-    """One-line colored status message: kind in success|error|warning|info."""
+    """One-line status message: kind in success|error|warning|info. A small
+    solid dot carries the color instead of a colorful emoji — closer to how
+    Databricks' own job/cluster status indicators read."""
     color = {"success": SUCCESS, "error": DANGER, "warning": WARNING, "info": MUTED_FOREGROUND}.get(kind, MUTED_FOREGROUND)
-    prefix = {"success": "✅", "error": "❌", "warning": "⚠️", "info": "ℹ️"}.get(kind, "")
-    return html(f"<span style='color:{color};font-family:{FONT_SANS}'>{prefix} {text}</span>")
+    return html(
+        f"<span style='font-family:{FONT_SANS};color:#1B3139'>"
+        f"<span style='display:inline-block;width:6px;height:6px;border-radius:50%;"
+        f"background:{color};margin-right:7px'></span>{text}</span>"
+    )
 
 
 def card(children, padding: str = "16px"):
@@ -285,7 +293,9 @@ def source_selector(label: str = "Source:") -> SourceSelector:
 
 
 def action_button(text: str, style: str = "primary", emoji: str = ""):
-    """style in primary|success|warning|danger|info — matches the Databricks button variants."""
+    """style in primary|success|warning|danger|info — matches the Databricks
+    button variants. `emoji` is kept for API compatibility but not used by
+    any dash-* package — Databricks buttons are plain text, no glyph."""
     w = _require_widgets()
     label = f"{emoji} {text}".strip()
     btn = w.Button(description=label, layout=w.Layout(height="32px", padding="0 14px", width="auto"))

@@ -22,11 +22,12 @@ def test_header_returns_widget():
 
 
 def test_status_line_kinds():
+    from dashui.theme import DANGER, SUCCESS
     import dashui
     ok = dashui.status_line("done", kind="success")
     err = dashui.status_line("bad", kind="error")
-    assert "✅" in ok.value
-    assert "❌" in err.value
+    assert "done" in ok.value and SUCCESS in ok.value
+    assert "bad" in err.value and DANGER in err.value
 
 
 def test_source_selector_default_value():
