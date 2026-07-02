@@ -72,6 +72,21 @@
 
             </li>
             <li>
+                    <a class="class" href="#EnvSetupPanel">EnvSetupPanel</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#EnvSetupPanel.__init__">EnvSetupPanel</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#EnvSetupPanel.widget">widget</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#EnvSetupPanel.values">values</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
                     <a class="function" href="#action_button">action_button</a>
             </li>
             <li>
@@ -79,6 +94,9 @@
             </li>
             <li>
                     <a class="function" href="#editable_table">editable_table</a>
+            </li>
+            <li>
+                    <a class="function" href="#env_setup_panel">env_setup_panel</a>
             </li>
             <li>
                     <a class="function" href="#header">header</a>
@@ -106,6 +124,24 @@
             </li>
             <li>
                     <a class="function" href="#list_columns_safe">list_columns_safe</a>
+            </li>
+            <li>
+                    <a class="function" href="#get_config_dir">get_config_dir</a>
+            </li>
+            <li>
+                    <a class="function" href="#set_config_dir">set_config_dir</a>
+            </li>
+            <li>
+                    <a class="function" href="#clear_config_dir">clear_config_dir</a>
+            </li>
+            <li>
+                    <a class="function" href="#config_path">config_path</a>
+            </li>
+            <li>
+                    <a class="function" href="#load_config">load_config</a>
+            </li>
+            <li>
+                    <a class="function" href="#save_config">save_config</a>
             </li>
             <li>
                     <a class="function" href="#accent">accent</a>
@@ -179,67 +215,85 @@ Import from here in any dash-* package instead of duplicating widget code.</p>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.components</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">EditableTable</span><span class="p">,</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">SourceSelector</span><span class="p">,</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">action_button</span><span class="p">,</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">card</span><span class="p">,</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">editable_table</span><span class="p">,</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">header</span><span class="p">,</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">html</span><span class="p">,</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">output_panel</span><span class="p">,</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">running_list</span><span class="p">,</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">section</span><span class="p">,</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">source_selector</span><span class="p">,</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">status_line</span><span class="p">,</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="p">)</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_columns</span><span class="p">,</span> <span class="n">list_columns_safe</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.theme</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">ACCENT_BG</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">ACCENT_FG</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">BORDER</span><span class="p">,</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">BORDER_STRONG</span><span class="p">,</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">CARD</span><span class="p">,</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">DANGER</span><span class="p">,</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">FONT_MONO</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">FONT_SANS</span><span class="p">,</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">INFO</span><span class="p">,</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">MUTED</span><span class="p">,</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">PRIMARY</span><span class="p">,</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">SUCCESS</span><span class="p">,</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">WARNING</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">accent</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="p">)</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.2.3&quot;</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="s2">&quot;SourceSelector&quot;</span><span class="p">,</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="s2">&quot;EditableTable&quot;</span><span class="p">,</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="s2">&quot;action_button&quot;</span><span class="p">,</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="s2">&quot;card&quot;</span><span class="p">,</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="s2">&quot;editable_table&quot;</span><span class="p">,</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="s2">&quot;header&quot;</span><span class="p">,</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="s2">&quot;html&quot;</span><span class="p">,</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="s2">&quot;output_panel&quot;</span><span class="p">,</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="s2">&quot;running_list&quot;</span><span class="p">,</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="s2">&quot;section&quot;</span><span class="p">,</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="s2">&quot;source_selector&quot;</span><span class="p">,</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="s2">&quot;status_line&quot;</span><span class="p">,</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="s2">&quot;list_columns&quot;</span><span class="p">,</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="s2">&quot;list_columns_safe&quot;</span><span class="p">,</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="s2">&quot;accent&quot;</span><span class="p">,</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="s2">&quot;DANGER&quot;</span><span class="p">,</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="s2">&quot;BORDER&quot;</span><span class="p">,</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="s2">&quot;BORDER_STRONG&quot;</span><span class="p">,</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="s2">&quot;CARD&quot;</span><span class="p">,</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="s2">&quot;MUTED&quot;</span><span class="p">,</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="s2">&quot;ACCENT_BG&quot;</span><span class="p">,</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="s2">&quot;ACCENT_FG&quot;</span><span class="p">,</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="s2">&quot;FONT_SANS&quot;</span><span class="p">,</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="s2">&quot;FONT_MONO&quot;</span><span class="p">,</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="p">]</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">EnvSetupPanel</span><span class="p">,</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">SourceSelector</span><span class="p">,</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">action_button</span><span class="p">,</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">card</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">editable_table</span><span class="p">,</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">env_setup_panel</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">header</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">html</span><span class="p">,</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">output_panel</span><span class="p">,</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">running_list</span><span class="p">,</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">section</span><span class="p">,</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">source_selector</span><span class="p">,</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">status_line</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="p">)</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.persistence</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">clear_config_dir</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">config_path</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">get_config_dir</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">load_config</span><span class="p">,</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">save_config</span><span class="p">,</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">set_config_dir</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="p">)</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_columns</span><span class="p">,</span> <span class="n">list_columns_safe</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.theme</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">ACCENT_BG</span><span class="p">,</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">ACCENT_FG</span><span class="p">,</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">BORDER</span><span class="p">,</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">BORDER_STRONG</span><span class="p">,</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="n">CARD</span><span class="p">,</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="n">DANGER</span><span class="p">,</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="n">FONT_MONO</span><span class="p">,</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="n">FONT_SANS</span><span class="p">,</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="n">INFO</span><span class="p">,</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="n">MUTED</span><span class="p">,</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="n">PRIMARY</span><span class="p">,</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="n">SUCCESS</span><span class="p">,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="n">WARNING</span><span class="p">,</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="n">accent</span><span class="p">,</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="p">)</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.3.1&quot;</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="s2">&quot;SourceSelector&quot;</span><span class="p">,</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="s2">&quot;EditableTable&quot;</span><span class="p">,</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="s2">&quot;EnvSetupPanel&quot;</span><span class="p">,</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="s2">&quot;action_button&quot;</span><span class="p">,</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="s2">&quot;card&quot;</span><span class="p">,</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="s2">&quot;editable_table&quot;</span><span class="p">,</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="s2">&quot;env_setup_panel&quot;</span><span class="p">,</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="s2">&quot;header&quot;</span><span class="p">,</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="s2">&quot;html&quot;</span><span class="p">,</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="s2">&quot;output_panel&quot;</span><span class="p">,</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="s2">&quot;running_list&quot;</span><span class="p">,</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="s2">&quot;section&quot;</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="s2">&quot;source_selector&quot;</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="s2">&quot;status_line&quot;</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="s2">&quot;list_columns&quot;</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="s2">&quot;list_columns_safe&quot;</span><span class="p">,</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="s2">&quot;get_config_dir&quot;</span><span class="p">,</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="s2">&quot;set_config_dir&quot;</span><span class="p">,</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>    <span class="s2">&quot;clear_config_dir&quot;</span><span class="p">,</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>    <span class="s2">&quot;config_path&quot;</span><span class="p">,</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="s2">&quot;load_config&quot;</span><span class="p">,</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>    <span class="s2">&quot;save_config&quot;</span><span class="p">,</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>    <span class="s2">&quot;accent&quot;</span><span class="p">,</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>    <span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>    <span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>    <span class="s2">&quot;DANGER&quot;</span><span class="p">,</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>    <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>    <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>    <span class="s2">&quot;BORDER&quot;</span><span class="p">,</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>    <span class="s2">&quot;BORDER_STRONG&quot;</span><span class="p">,</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>    <span class="s2">&quot;CARD&quot;</span><span class="p">,</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>    <span class="s2">&quot;MUTED&quot;</span><span class="p">,</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>    <span class="s2">&quot;ACCENT_BG&quot;</span><span class="p">,</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>    <span class="s2">&quot;ACCENT_FG&quot;</span><span class="p">,</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>    <span class="s2">&quot;FONT_SANS&quot;</span><span class="p">,</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>    <span class="s2">&quot;FONT_MONO&quot;</span><span class="p">,</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a><span class="p">]</span>
 </span></pre></div>
 
 
@@ -524,6 +578,62 @@ single free-text "key=value, key=value" field.</p>
 
                             </div>
                 </section>
+                <section id="EnvSetupPanel">
+                            <input id="EnvSetupPanel-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator decorator-dataclass">@dataclass</div>
+
+    <span class="def">class</span>
+    <span class="name">EnvSetupPanel</span>:
+
+                <label class="view-source-button" for="EnvSetupPanel-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#EnvSetupPanel"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="EnvSetupPanel-480"><a href="#EnvSetupPanel-480"><span class="linenos">480</span></a><span class="nd">@dataclass</span>
+</span><span id="EnvSetupPanel-481"><a href="#EnvSetupPanel-481"><span class="linenos">481</span></a><span class="k">class</span><span class="w"> </span><span class="nc">EnvSetupPanel</span><span class="p">:</span>
+</span><span id="EnvSetupPanel-482"><a href="#EnvSetupPanel-482"><span class="linenos">482</span></a>    <span class="n">widget</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="EnvSetupPanel-483"><a href="#EnvSetupPanel-483"><span class="linenos">483</span></a>    <span class="n">values</span><span class="p">:</span> <span class="nb">object</span>  <span class="c1"># callable() -&gt; dict</span>
+</span></pre></div>
+
+
+    
+
+                            <div id="EnvSetupPanel.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">EnvSetupPanel</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">widget</span><span class="p">:</span> <span class="nb">object</span>, </span><span class="param"><span class="n">values</span><span class="p">:</span> <span class="nb">object</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EnvSetupPanel.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="EnvSetupPanel.widget" class="classattr">
+                                <div class="attr variable">
+            <span class="name">widget</span><span class="annotation">: object</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EnvSetupPanel.widget"></a>
+    
+    
+
+                            </div>
+                            <div id="EnvSetupPanel.values" class="classattr">
+                                <div class="attr variable">
+            <span class="name">values</span><span class="annotation">: object</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EnvSetupPanel.values"></a>
+    
+    
+
+                            </div>
+                </section>
                 <section id="action_button">
                             <input id="action_button-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
@@ -643,6 +753,107 @@ any dash-* package — Databricks buttons are plain text, no glyph.</p>
 
 
     
+
+                </section>
+                <section id="env_setup_panel">
+                            <input id="env_setup_panel-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">env_setup_panel</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">extra_fields</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="env_setup_panel-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#env_setup_panel"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="env_setup_panel-403"><a href="#env_setup_panel-403"><span class="linenos">403</span></a><span class="k">def</span><span class="w"> </span><span class="nf">env_setup_panel</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extra_fields</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</span><span id="env_setup_panel-404"><a href="#env_setup_panel-404"><span class="linenos">404</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="env_setup_panel-405"><a href="#env_setup_panel-405"><span class="linenos">405</span></a><span class="sd">    A ready-to-embed &quot;Environment Setup&quot; panel: where should this package&#39;s</span>
+</span><span id="env_setup_panel-406"><a href="#env_setup_panel-406"><span class="linenos">406</span></a><span class="sd">    configs live? Defaults to the notebook&#39;s current working directory;</span>
+</span><span id="env_setup_panel-407"><a href="#env_setup_panel-407"><span class="linenos">407</span></a><span class="sd">    Save remembers a different directory (e.g. a Workspace path or Volume)</span>
+</span><span id="env_setup_panel-408"><a href="#env_setup_panel-408"><span class="linenos">408</span></a><span class="sd">    for every future session, across notebooks.</span>
+</span><span id="env_setup_panel-409"><a href="#env_setup_panel-409"><span class="linenos">409</span></a>
+</span><span id="env_setup_panel-410"><a href="#env_setup_panel-410"><span class="linenos">410</span></a><span class="sd">    `extra_fields` is `{label: placeholder}` for any library-specific</span>
+</span><span id="env_setup_panel-411"><a href="#env_setup_panel-411"><span class="linenos">411</span></a><span class="sd">    defaults (e.g. {&quot;Default catalog&quot;: &quot;main&quot;}) — saved alongside the</span>
+</span><span id="env_setup_panel-412"><a href="#env_setup_panel-412"><span class="linenos">412</span></a><span class="sd">    directory choice and available via the returned `values()`.</span>
+</span><span id="env_setup_panel-413"><a href="#env_setup_panel-413"><span class="linenos">413</span></a>
+</span><span id="env_setup_panel-414"><a href="#env_setup_panel-414"><span class="linenos">414</span></a><span class="sd">    Usage::</span>
+</span><span id="env_setup_panel-415"><a href="#env_setup_panel-415"><span class="linenos">415</span></a><span class="sd">        env = dashui.env_setup_panel(&quot;dashingest&quot;, extra_fields={&quot;Default catalog&quot;: &quot;main&quot;})</span>
+</span><span id="env_setup_panel-416"><a href="#env_setup_panel-416"><span class="linenos">416</span></a><span class="sd">        ui = card([..., env.widget, ...])</span>
+</span><span id="env_setup_panel-417"><a href="#env_setup_panel-417"><span class="linenos">417</span></a><span class="sd">        settings = env.values()  # {&quot;config_dir&quot;: ..., &quot;Default catalog&quot;: ...}</span>
+</span><span id="env_setup_panel-418"><a href="#env_setup_panel-418"><span class="linenos">418</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="env_setup_panel-419"><a href="#env_setup_panel-419"><span class="linenos">419</span></a>    <span class="kn">from</span><span class="w"> </span><span class="nn">dashui.persistence</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_config_dir</span><span class="p">,</span> <span class="n">load_config</span><span class="p">,</span> <span class="n">save_config</span><span class="p">,</span> <span class="n">set_config_dir</span>
+</span><span id="env_setup_panel-420"><a href="#env_setup_panel-420"><span class="linenos">420</span></a>
+</span><span id="env_setup_panel-421"><a href="#env_setup_panel-421"><span class="linenos">421</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="env_setup_panel-422"><a href="#env_setup_panel-422"><span class="linenos">422</span></a>    <span class="n">extra_fields</span> <span class="o">=</span> <span class="n">extra_fields</span> <span class="ow">or</span> <span class="p">{}</span>
+</span><span id="env_setup_panel-423"><a href="#env_setup_panel-423"><span class="linenos">423</span></a>    <span class="n">saved</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;env&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-424"><a href="#env_setup_panel-424"><span class="linenos">424</span></a>
+</span><span id="env_setup_panel-425"><a href="#env_setup_panel-425"><span class="linenos">425</span></a>    <span class="n">dir_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+</span><span id="env_setup_panel-426"><a href="#env_setup_panel-426"><span class="linenos">426</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Config directory:&quot;</span><span class="p">,</span>
+</span><span id="env_setup_panel-427"><a href="#env_setup_panel-427"><span class="linenos">427</span></a>        <span class="n">value</span><span class="o">=</span><span class="n">saved</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config_dir&quot;</span><span class="p">,</span> <span class="n">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">)),</span>
+</span><span id="env_setup_panel-428"><a href="#env_setup_panel-428"><span class="linenos">428</span></a>        <span class="n">placeholder</span><span class="o">=</span><span class="n">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">),</span>
+</span><span id="env_setup_panel-429"><a href="#env_setup_panel-429"><span class="linenos">429</span></a>        <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;420px&quot;</span><span class="p">),</span>
+</span><span id="env_setup_panel-430"><a href="#env_setup_panel-430"><span class="linenos">430</span></a>    <span class="p">)</span>
+</span><span id="env_setup_panel-431"><a href="#env_setup_panel-431"><span class="linenos">431</span></a>    <span class="n">extra_inputs</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="env_setup_panel-432"><a href="#env_setup_panel-432"><span class="linenos">432</span></a>        <span class="n">label</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">saved</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">placeholder</span><span class="o">=</span><span class="n">placeholder</span><span class="p">)</span>
+</span><span id="env_setup_panel-433"><a href="#env_setup_panel-433"><span class="linenos">433</span></a>        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">placeholder</span> <span class="ow">in</span> <span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span id="env_setup_panel-434"><a href="#env_setup_panel-434"><span class="linenos">434</span></a>    <span class="p">}</span>
+</span><span id="env_setup_panel-435"><a href="#env_setup_panel-435"><span class="linenos">435</span></a>
+</span><span id="env_setup_panel-436"><a href="#env_setup_panel-436"><span class="linenos">436</span></a>    <span class="n">save_btn</span> <span class="o">=</span> <span class="n">action_button</span><span class="p">(</span><span class="s2">&quot;Save&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-437"><a href="#env_setup_panel-437"><span class="linenos">437</span></a>    <span class="n">reload_btn</span> <span class="o">=</span> <span class="n">action_button</span><span class="p">(</span><span class="s2">&quot;Reload&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-438"><a href="#env_setup_panel-438"><span class="linenos">438</span></a>    <span class="n">status</span> <span class="o">=</span> <span class="n">html</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;font-size:12px;color:</span><span class="si">{</span><span class="n">MUTED_FOREGROUND</span><span class="si">}</span><span class="s2">&#39;&gt;Currently using: &lt;code&gt;</span><span class="si">{</span><span class="n">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/code&gt;&lt;/span&gt;&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-439"><a href="#env_setup_panel-439"><span class="linenos">439</span></a>
+</span><span id="env_setup_panel-440"><a href="#env_setup_panel-440"><span class="linenos">440</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_collect</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="env_setup_panel-441"><a href="#env_setup_panel-441"><span class="linenos">441</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;config_dir&quot;</span><span class="p">:</span> <span class="n">dir_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="n">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">),</span>
+</span><span id="env_setup_panel-442"><a href="#env_setup_panel-442"><span class="linenos">442</span></a>                <span class="o">**</span><span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">field</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">extra_inputs</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span>
+</span><span id="env_setup_panel-443"><a href="#env_setup_panel-443"><span class="linenos">443</span></a>
+</span><span id="env_setup_panel-444"><a href="#env_setup_panel-444"><span class="linenos">444</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_on_save</span><span class="p">(</span><span class="n">_b</span><span class="p">):</span>
+</span><span id="env_setup_panel-445"><a href="#env_setup_panel-445"><span class="linenos">445</span></a>        <span class="n">config</span> <span class="o">=</span> <span class="n">_collect</span><span class="p">()</span>
+</span><span id="env_setup_panel-446"><a href="#env_setup_panel-446"><span class="linenos">446</span></a>        <span class="n">set_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;config_dir&quot;</span><span class="p">])</span>
+</span><span id="env_setup_panel-447"><a href="#env_setup_panel-447"><span class="linenos">447</span></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">save_config</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;env&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-448"><a href="#env_setup_panel-448"><span class="linenos">448</span></a>        <span class="n">status</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;font-size:12px;color:</span><span class="si">{</span><span class="n">SUCCESS</span><span class="si">}</span><span class="s2">&#39;&gt;Saved — settings will be read from &lt;code&gt;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&lt;/code&gt; in future sessions.&lt;/span&gt;&quot;</span>
+</span><span id="env_setup_panel-449"><a href="#env_setup_panel-449"><span class="linenos">449</span></a>
+</span><span id="env_setup_panel-450"><a href="#env_setup_panel-450"><span class="linenos">450</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_on_reload</span><span class="p">(</span><span class="n">_b</span><span class="p">):</span>
+</span><span id="env_setup_panel-451"><a href="#env_setup_panel-451"><span class="linenos">451</span></a>        <span class="n">current</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;env&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-452"><a href="#env_setup_panel-452"><span class="linenos">452</span></a>        <span class="n">dir_input</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config_dir&quot;</span><span class="p">,</span> <span class="n">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">))</span>
+</span><span id="env_setup_panel-453"><a href="#env_setup_panel-453"><span class="linenos">453</span></a>        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">extra_inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="env_setup_panel-454"><a href="#env_setup_panel-454"><span class="linenos">454</span></a>            <span class="n">field</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span id="env_setup_panel-455"><a href="#env_setup_panel-455"><span class="linenos">455</span></a>        <span class="n">status</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;font-size:12px;color:</span><span class="si">{</span><span class="n">MUTED_FOREGROUND</span><span class="si">}</span><span class="s2">&#39;&gt;Reloaded from &lt;code&gt;</span><span class="si">{</span><span class="n">config_path_display</span><span class="p">(</span><span class="n">library</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/code&gt;.&lt;/span&gt;&quot;</span>
+</span><span id="env_setup_panel-456"><a href="#env_setup_panel-456"><span class="linenos">456</span></a>
+</span><span id="env_setup_panel-457"><a href="#env_setup_panel-457"><span class="linenos">457</span></a>    <span class="n">save_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">_on_save</span><span class="p">)</span>
+</span><span id="env_setup_panel-458"><a href="#env_setup_panel-458"><span class="linenos">458</span></a>    <span class="n">reload_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">_on_reload</span><span class="p">)</span>
+</span><span id="env_setup_panel-459"><a href="#env_setup_panel-459"><span class="linenos">459</span></a>
+</span><span id="env_setup_panel-460"><a href="#env_setup_panel-460"><span class="linenos">460</span></a>    <span class="n">panel</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span>
+</span><span id="env_setup_panel-461"><a href="#env_setup_panel-461"><span class="linenos">461</span></a>        <span class="n">html</span><span class="p">(</span>
+</span><span id="env_setup_panel-462"><a href="#env_setup_panel-462"><span class="linenos">462</span></a>            <span class="sa">f</span><span class="s2">&quot;&lt;div style=&#39;font-size:12px;color:</span><span class="si">{</span><span class="n">MUTED_FOREGROUND</span><span class="si">}</span><span class="s2">;margin-bottom:4px&#39;&gt;&quot;</span>
+</span><span id="env_setup_panel-463"><a href="#env_setup_panel-463"><span class="linenos">463</span></a>            <span class="s2">&quot;Where should this package&#39;s configs be read/written? Leave as-is to use &quot;</span>
+</span><span id="env_setup_panel-464"><a href="#env_setup_panel-464"><span class="linenos">464</span></a>            <span class="s2">&quot;the notebook&#39;s current working directory — nothing here is required.&quot;</span>
+</span><span id="env_setup_panel-465"><a href="#env_setup_panel-465"><span class="linenos">465</span></a>            <span class="s2">&quot;&lt;/div&gt;&quot;</span>
+</span><span id="env_setup_panel-466"><a href="#env_setup_panel-466"><span class="linenos">466</span></a>        <span class="p">),</span>
+</span><span id="env_setup_panel-467"><a href="#env_setup_panel-467"><span class="linenos">467</span></a>        <span class="n">dir_input</span><span class="p">,</span>
+</span><span id="env_setup_panel-468"><a href="#env_setup_panel-468"><span class="linenos">468</span></a>        <span class="o">*</span><span class="n">extra_inputs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+</span><span id="env_setup_panel-469"><a href="#env_setup_panel-469"><span class="linenos">469</span></a>        <span class="n">w</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">save_btn</span><span class="p">,</span> <span class="n">reload_btn</span><span class="p">]),</span>
+</span><span id="env_setup_panel-470"><a href="#env_setup_panel-470"><span class="linenos">470</span></a>        <span class="n">status</span><span class="p">,</span>
+</span><span id="env_setup_panel-471"><a href="#env_setup_panel-471"><span class="linenos">471</span></a>    <span class="p">])</span>
+</span><span id="env_setup_panel-472"><a href="#env_setup_panel-472"><span class="linenos">472</span></a>    <span class="k">return</span> <span class="n">EnvSetupPanel</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">panel</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">_collect</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>A ready-to-embed "Environment Setup" panel: where should this package's
+configs live? Defaults to the notebook's current working directory;
+Save remembers a different directory (e.g. a Workspace path or Volume)
+for every future session, across notebooks.</p>
+
+<p><code>extra_fields</code> is <code>{label: placeholder}</code> for any library-specific
+defaults (e.g. {"Default catalog": "main"}) — saved alongside the
+directory choice and available via the returned <code>values()</code>.</p>
+
+<p>Usage::
+    env = <a href="#env_setup_panel">dashui.env_setup_panel</a>("dashingest", extra_fields={"Default catalog": "main"})
+    ui = card([..., env.widget, ...])
+    settings = env.values()  # {"config_dir": ..., "Default catalog": ...}</p>
+</div>
+
 
                 </section>
                 <section id="header">
@@ -906,6 +1117,162 @@ Databricks' own job/cluster status indicators read.</p>
 
 
             <div class="docstring"><p>Like list_columns, but returns [] instead of raising — for UI dropdowns.</p>
+</div>
+
+
+                </section>
+                <section id="get_config_dir">
+                            <input id="get_config_dir-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">get_config_dir</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+                <label class="view-source-button" for="get_config_dir-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#get_config_dir"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_config_dir-29"><a href="#get_config_dir-29"><span class="linenos">29</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="get_config_dir-30"><a href="#get_config_dir-30"><span class="linenos">30</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;The directory configs for `library` should be read/written from:</span>
+</span><span id="get_config_dir-31"><a href="#get_config_dir-31"><span class="linenos">31</span></a><span class="sd">    the env_setup()-configured directory if one was set, else cwd.&quot;&quot;&quot;</span>
+</span><span id="get_config_dir-32"><a href="#get_config_dir-32"><span class="linenos">32</span></a>    <span class="n">pointer</span> <span class="o">=</span> <span class="n">_pointer_path</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
+</span><span id="get_config_dir-33"><a href="#get_config_dir-33"><span class="linenos">33</span></a>    <span class="k">if</span> <span class="n">pointer</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+</span><span id="get_config_dir-34"><a href="#get_config_dir-34"><span class="linenos">34</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="get_config_dir-35"><a href="#get_config_dir-35"><span class="linenos">35</span></a>            <span class="n">configured</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pointer</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config_dir&quot;</span><span class="p">)</span>
+</span><span id="get_config_dir-36"><a href="#get_config_dir-36"><span class="linenos">36</span></a>            <span class="k">if</span> <span class="n">configured</span><span class="p">:</span>
+</span><span id="get_config_dir-37"><a href="#get_config_dir-37"><span class="linenos">37</span></a>                <span class="k">return</span> <span class="n">configured</span>
+</span><span id="get_config_dir-38"><a href="#get_config_dir-38"><span class="linenos">38</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="get_config_dir-39"><a href="#get_config_dir-39"><span class="linenos">39</span></a>            <span class="k">pass</span>
+</span><span id="get_config_dir-40"><a href="#get_config_dir-40"><span class="linenos">40</span></a>    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DASHLIBS_CONFIG_DIR&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>The directory configs for <code>library</code> should be read/written from:
+the env_setup()-configured directory if one was set, else cwd.</p>
+</div>
+
+
+                </section>
+                <section id="set_config_dir">
+                            <input id="set_config_dir-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">set_config_dir</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">path</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <label class="view-source-button" for="set_config_dir-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#set_config_dir"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="set_config_dir-43"><a href="#set_config_dir-43"><span class="linenos">43</span></a><span class="k">def</span><span class="w"> </span><span class="nf">set_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="set_config_dir-44"><a href="#set_config_dir-44"><span class="linenos">44</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remember `path` as this library&#39;s config directory for future sessions.&quot;&quot;&quot;</span>
+</span><span id="set_config_dir-45"><a href="#set_config_dir-45"><span class="linenos">45</span></a>    <span class="n">pointer</span> <span class="o">=</span> <span class="n">_pointer_path</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
+</span><span id="set_config_dir-46"><a href="#set_config_dir-46"><span class="linenos">46</span></a>    <span class="n">pointer</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="set_config_dir-47"><a href="#set_config_dir-47"><span class="linenos">47</span></a>    <span class="n">pointer</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;config_dir&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Remember <code>path</code> as this library's config directory for future sessions.</p>
+</div>
+
+
+                </section>
+                <section id="clear_config_dir">
+                            <input id="clear_config_dir-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">clear_config_dir</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <label class="view-source-button" for="clear_config_dir-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#clear_config_dir"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="clear_config_dir-50"><a href="#clear_config_dir-50"><span class="linenos">50</span></a><span class="k">def</span><span class="w"> </span><span class="nf">clear_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="clear_config_dir-51"><a href="#clear_config_dir-51"><span class="linenos">51</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Forget the configured directory — future calls fall back to cwd again.&quot;&quot;&quot;</span>
+</span><span id="clear_config_dir-52"><a href="#clear_config_dir-52"><span class="linenos">52</span></a>    <span class="n">pointer</span> <span class="o">=</span> <span class="n">_pointer_path</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
+</span><span id="clear_config_dir-53"><a href="#clear_config_dir-53"><span class="linenos">53</span></a>    <span class="k">if</span> <span class="n">pointer</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+</span><span id="clear_config_dir-54"><a href="#clear_config_dir-54"><span class="linenos">54</span></a>        <span class="n">pointer</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Forget the configured directory — future calls fall back to cwd again.</p>
+</div>
+
+
+                </section>
+                <section id="config_path">
+                            <input id="config_path-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">config_path</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;config&#39;</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+                <label class="view-source-button" for="config_path-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#config_path"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="config_path-57"><a href="#config_path-57"><span class="linenos">57</span></a><span class="k">def</span><span class="w"> </span><span class="nf">config_path</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;config&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="config_path-58"><a href="#config_path-58"><span class="linenos">58</span></a>    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_config_dir</span><span class="p">(</span><span class="n">library</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">library</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+</span></pre></div>
+
+
+    
+
+                </section>
+                <section id="load_config">
+                            <input id="load_config-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">load_config</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;config&#39;</span>, </span><span class="param"><span class="n">defaults</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
+
+                <label class="view-source-button" for="load_config-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#load_config"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="load_config-61"><a href="#load_config-61"><span class="linenos">61</span></a><span class="k">def</span><span class="w"> </span><span class="nf">load_config</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">defaults</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="load_config-62"><a href="#load_config-62"><span class="linenos">62</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read `&lt;config_dir&gt;/&lt;library&gt;_&lt;name&gt;.json`, merged over `defaults`.</span>
+</span><span id="load_config-63"><a href="#load_config-63"><span class="linenos">63</span></a><span class="sd">    Returns `defaults` (or {}) unchanged if the file doesn&#39;t exist or is invalid.&quot;&quot;&quot;</span>
+</span><span id="load_config-64"><a href="#load_config-64"><span class="linenos">64</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">config_path</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span><span id="load_config-65"><a href="#load_config-65"><span class="linenos">65</span></a>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span><span id="load_config-66"><a href="#load_config-66"><span class="linenos">66</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="load_config-67"><a href="#load_config-67"><span class="linenos">67</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="load_config-68"><a href="#load_config-68"><span class="linenos">68</span></a>                <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="p">(</span><span class="n">defaults</span> <span class="ow">or</span> <span class="p">{}),</span> <span class="o">**</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)}</span>
+</span><span id="load_config-69"><a href="#load_config-69"><span class="linenos">69</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="load_config-70"><a href="#load_config-70"><span class="linenos">70</span></a>            <span class="k">pass</span>
+</span><span id="load_config-71"><a href="#load_config-71"><span class="linenos">71</span></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">defaults</span> <span class="ow">or</span> <span class="p">{})</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Read <code>&lt;config_dir&gt;/&lt;library&gt;_&lt;name&gt;.json</code>, merged over <code>defaults</code>.
+Returns <code>defaults</code> (or {}) unchanged if the file doesn't exist or is invalid.</p>
+</div>
+
+
+                </section>
+                <section id="save_config">
+                            <input id="save_config-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">save_config</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">library</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">config</span><span class="p">:</span> <span class="nb">dict</span>, </span><span class="param"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;config&#39;</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+                <label class="view-source-button" for="save_config-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#save_config"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="save_config-74"><a href="#save_config-74"><span class="linenos">74</span></a><span class="k">def</span><span class="w"> </span><span class="nf">save_config</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;config&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="save_config-75"><a href="#save_config-75"><span class="linenos">75</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Write `config` to `&lt;config_dir&gt;/&lt;library&gt;_&lt;name&gt;.json`. Returns the path written.&quot;&quot;&quot;</span>
+</span><span id="save_config-76"><a href="#save_config-76"><span class="linenos">76</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">config_path</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span><span id="save_config-77"><a href="#save_config-77"><span class="linenos">77</span></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="save_config-78"><a href="#save_config-78"><span class="linenos">78</span></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="save_config-79"><a href="#save_config-79"><span class="linenos">79</span></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="save_config-80"><a href="#save_config-80"><span class="linenos">80</span></a>    <span class="k">return</span> <span class="n">path</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Write <code>config</code> to <code>&lt;config_dir&gt;/&lt;library&gt;_&lt;name&gt;.json</code>. Returns the path written.</p>
 </div>
 
 
