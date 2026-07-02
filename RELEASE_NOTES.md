@@ -1,7 +1,7 @@
-## DashUI v0.1.3
+## DashUI v0.2.1
 
-**Released:** 2026-07-01
-**Previous:** v0.1.2
+**Released:** 2026-07-02
+**Previous:** v0.2.0
 
 
 
@@ -12,5 +12,5 @@
 
 ### Install
 ```bash
-pip install dash-uis==0.1.3
+pip install dash-uis==0.2.1
 ```
