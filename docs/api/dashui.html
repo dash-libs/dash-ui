@@ -54,10 +54,31 @@
 
             </li>
             <li>
+                    <a class="class" href="#EditableTable">EditableTable</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#EditableTable.__init__">EditableTable</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#EditableTable.widget">widget</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#EditableTable.add_row">add_row</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#EditableTable.values">values</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
                     <a class="function" href="#action_button">action_button</a>
             </li>
             <li>
                     <a class="function" href="#card">card</a>
+            </li>
+            <li>
+                    <a class="function" href="#editable_table">editable_table</a>
             </li>
             <li>
                     <a class="function" href="#header">header</a>
@@ -102,13 +123,25 @@
                     <a class="variable" href="#WARNING">WARNING</a>
             </li>
             <li>
+                    <a class="variable" href="#INFO">INFO</a>
+            </li>
+            <li>
                     <a class="variable" href="#BORDER">BORDER</a>
+            </li>
+            <li>
+                    <a class="variable" href="#BORDER_STRONG">BORDER_STRONG</a>
             </li>
             <li>
                     <a class="variable" href="#CARD">CARD</a>
             </li>
             <li>
                     <a class="variable" href="#MUTED">MUTED</a>
+            </li>
+            <li>
+                    <a class="variable" href="#ACCENT_BG">ACCENT_BG</a>
+            </li>
+            <li>
+                    <a class="variable" href="#ACCENT_FG">ACCENT_FG</a>
             </li>
             <li>
                     <a class="variable" href="#FONT_SANS">FONT_SANS</a>
@@ -145,56 +178,68 @@ Import from here in any dash-* package instead of duplicating widget code.</p>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">Import from here in any dash-* package instead of duplicating widget code.</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.components</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">SourceSelector</span><span class="p">,</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">action_button</span><span class="p">,</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">card</span><span class="p">,</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">header</span><span class="p">,</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">html</span><span class="p">,</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">output_panel</span><span class="p">,</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">running_list</span><span class="p">,</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">section</span><span class="p">,</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">source_selector</span><span class="p">,</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">status_line</span><span class="p">,</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="p">)</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_columns</span><span class="p">,</span> <span class="n">list_columns_safe</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.theme</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">BORDER</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">CARD</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">DANGER</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">FONT_MONO</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">FONT_SANS</span><span class="p">,</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">MUTED</span><span class="p">,</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">PRIMARY</span><span class="p">,</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">SUCCESS</span><span class="p">,</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">WARNING</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">accent</span><span class="p">,</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="p">)</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.3&quot;</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="s2">&quot;SourceSelector&quot;</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="s2">&quot;action_button&quot;</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="s2">&quot;card&quot;</span><span class="p">,</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="s2">&quot;header&quot;</span><span class="p">,</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="s2">&quot;html&quot;</span><span class="p">,</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="s2">&quot;output_panel&quot;</span><span class="p">,</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="s2">&quot;running_list&quot;</span><span class="p">,</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="s2">&quot;section&quot;</span><span class="p">,</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="s2">&quot;source_selector&quot;</span><span class="p">,</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="s2">&quot;status_line&quot;</span><span class="p">,</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="s2">&quot;list_columns&quot;</span><span class="p">,</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="s2">&quot;list_columns_safe&quot;</span><span class="p">,</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="s2">&quot;accent&quot;</span><span class="p">,</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="s2">&quot;DANGER&quot;</span><span class="p">,</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="s2">&quot;BORDER&quot;</span><span class="p">,</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="s2">&quot;CARD&quot;</span><span class="p">,</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="s2">&quot;MUTED&quot;</span><span class="p">,</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="s2">&quot;FONT_SANS&quot;</span><span class="p">,</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="s2">&quot;FONT_MONO&quot;</span><span class="p">,</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="p">]</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">EditableTable</span><span class="p">,</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">SourceSelector</span><span class="p">,</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">action_button</span><span class="p">,</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">card</span><span class="p">,</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">editable_table</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">header</span><span class="p">,</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">html</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">output_panel</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">running_list</span><span class="p">,</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">section</span><span class="p">,</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">source_selector</span><span class="p">,</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">status_line</span><span class="p">,</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="p">)</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_columns</span><span class="p">,</span> <span class="n">list_columns_safe</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">dashui.theme</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">ACCENT_BG</span><span class="p">,</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">ACCENT_FG</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">BORDER</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">BORDER_STRONG</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">CARD</span><span class="p">,</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">DANGER</span><span class="p">,</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">FONT_MONO</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">FONT_SANS</span><span class="p">,</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">INFO</span><span class="p">,</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">MUTED</span><span class="p">,</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">PRIMARY</span><span class="p">,</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">SUCCESS</span><span class="p">,</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">WARNING</span><span class="p">,</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">accent</span><span class="p">,</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="p">)</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.2.1&quot;</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="s2">&quot;SourceSelector&quot;</span><span class="p">,</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="s2">&quot;EditableTable&quot;</span><span class="p">,</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="s2">&quot;action_button&quot;</span><span class="p">,</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="s2">&quot;card&quot;</span><span class="p">,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="s2">&quot;editable_table&quot;</span><span class="p">,</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="s2">&quot;header&quot;</span><span class="p">,</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="s2">&quot;html&quot;</span><span class="p">,</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="s2">&quot;output_panel&quot;</span><span class="p">,</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="s2">&quot;running_list&quot;</span><span class="p">,</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="s2">&quot;section&quot;</span><span class="p">,</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="s2">&quot;source_selector&quot;</span><span class="p">,</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="s2">&quot;status_line&quot;</span><span class="p">,</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="s2">&quot;list_columns&quot;</span><span class="p">,</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="s2">&quot;list_columns_safe&quot;</span><span class="p">,</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="s2">&quot;accent&quot;</span><span class="p">,</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="s2">&quot;DANGER&quot;</span><span class="p">,</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="s2">&quot;BORDER&quot;</span><span class="p">,</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="s2">&quot;BORDER_STRONG&quot;</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="s2">&quot;CARD&quot;</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="s2">&quot;MUTED&quot;</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="s2">&quot;ACCENT_BG&quot;</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="s2">&quot;ACCENT_FG&quot;</span><span class="p">,</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="s2">&quot;FONT_SANS&quot;</span><span class="p">,</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="s2">&quot;FONT_MONO&quot;</span><span class="p">,</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="p">]</span>
 </span></pre></div>
 
 
@@ -211,46 +256,46 @@ Import from here in any dash-* package instead of duplicating widget code.</p>
 
     </div>
     <a class="headerlink" href="#SourceSelector"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="SourceSelector-132"><a href="#SourceSelector-132"><span class="linenos">132</span></a><span class="nd">@dataclass</span>
-</span><span id="SourceSelector-133"><a href="#SourceSelector-133"><span class="linenos">133</span></a><span class="k">class</span><span class="w"> </span><span class="nc">SourceSelector</span><span class="p">:</span>
-</span><span id="SourceSelector-134"><a href="#SourceSelector-134"><span class="linenos">134</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="SourceSelector-135"><a href="#SourceSelector-135"><span class="linenos">135</span></a><span class="sd">    The UC Table / DataFrame variable / SQL Query picker used by every</span>
-</span><span id="SourceSelector-136"><a href="#SourceSelector-136"><span class="linenos">136</span></a><span class="sd">    Dashlibs UI that reads from Databricks.</span>
-</span><span id="SourceSelector-137"><a href="#SourceSelector-137"><span class="linenos">137</span></a>
-</span><span id="SourceSelector-138"><a href="#SourceSelector-138"><span class="linenos">138</span></a><span class="sd">    Usage::</span>
-</span><span id="SourceSelector-139"><a href="#SourceSelector-139"><span class="linenos">139</span></a><span class="sd">        src = source_selector()</span>
-</span><span id="SourceSelector-140"><a href="#SourceSelector-140"><span class="linenos">140</span></a><span class="sd">        ui = card([src.toggle, src.box, ...])</span>
-</span><span id="SourceSelector-141"><a href="#SourceSelector-141"><span class="linenos">141</span></a><span class="sd">        kind, value = src.value()</span>
-</span><span id="SourceSelector-142"><a href="#SourceSelector-142"><span class="linenos">142</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="SourceSelector-143"><a href="#SourceSelector-143"><span class="linenos">143</span></a>    <span class="n">toggle</span><span class="p">:</span> <span class="nb">object</span>
-</span><span id="SourceSelector-144"><a href="#SourceSelector-144"><span class="linenos">144</span></a>    <span class="n">box</span><span class="p">:</span> <span class="nb">object</span>
-</span><span id="SourceSelector-145"><a href="#SourceSelector-145"><span class="linenos">145</span></a>    <span class="n">table_input</span><span class="p">:</span> <span class="nb">object</span>
-</span><span id="SourceSelector-146"><a href="#SourceSelector-146"><span class="linenos">146</span></a>    <span class="n">df_input</span><span class="p">:</span> <span class="nb">object</span>
-</span><span id="SourceSelector-147"><a href="#SourceSelector-147"><span class="linenos">147</span></a>    <span class="n">sql_input</span><span class="p">:</span> <span class="nb">object</span>
-</span><span id="SourceSelector-148"><a href="#SourceSelector-148"><span class="linenos">148</span></a>
-</span><span id="SourceSelector-149"><a href="#SourceSelector-149"><span class="linenos">149</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span id="SourceSelector-150"><a href="#SourceSelector-150"><span class="linenos">150</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns (kind, value) where kind is &#39;table&#39; | &#39;dataframe&#39; | &#39;sql&#39;.&quot;&quot;&quot;</span>
-</span><span id="SourceSelector-151"><a href="#SourceSelector-151"><span class="linenos">151</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;UC Table&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector-152"><a href="#SourceSelector-152"><span class="linenos">152</span></a>            <span class="k">return</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="SourceSelector-153"><a href="#SourceSelector-153"><span class="linenos">153</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector-154"><a href="#SourceSelector-154"><span class="linenos">154</span></a>            <span class="k">return</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="SourceSelector-155"><a href="#SourceSelector-155"><span class="linenos">155</span></a>        <span class="k">return</span> <span class="s2">&quot;sql&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="SourceSelector-156"><a href="#SourceSelector-156"><span class="linenos">156</span></a>
-</span><span id="SourceSelector-157"><a href="#SourceSelector-157"><span class="linenos">157</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">resolve_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="SourceSelector-158"><a href="#SourceSelector-158"><span class="linenos">158</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the selected source to a Spark DataFrame (for direct use in core classes).&quot;&quot;&quot;</span>
-</span><span id="SourceSelector-159"><a href="#SourceSelector-159"><span class="linenos">159</span></a>        <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-</span><span id="SourceSelector-160"><a href="#SourceSelector-160"><span class="linenos">160</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector-161"><a href="#SourceSelector-161"><span class="linenos">161</span></a>            <span class="kn">import</span><span class="w"> </span><span class="nn">IPython</span>
-</span><span id="SourceSelector-162"><a href="#SourceSelector-162"><span class="linenos">162</span></a>            <span class="n">shell</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">get_ipython</span><span class="p">()</span>
-</span><span id="SourceSelector-163"><a href="#SourceSelector-163"><span class="linenos">163</span></a>            <span class="n">df</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">shell</span> <span class="k">else</span> <span class="kc">None</span>
-</span><span id="SourceSelector-164"><a href="#SourceSelector-164"><span class="linenos">164</span></a>            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="SourceSelector-165"><a href="#SourceSelector-165"><span class="linenos">165</span></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variable &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
-</span><span id="SourceSelector-166"><a href="#SourceSelector-166"><span class="linenos">166</span></a>            <span class="k">return</span> <span class="n">df</span>
-</span><span id="SourceSelector-167"><a href="#SourceSelector-167"><span class="linenos">167</span></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
-</span><span id="SourceSelector-168"><a href="#SourceSelector-168"><span class="linenos">168</span></a>        <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
-</span><span id="SourceSelector-169"><a href="#SourceSelector-169"><span class="linenos">169</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;table&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector-170"><a href="#SourceSelector-170"><span class="linenos">170</span></a>            <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span id="SourceSelector-171"><a href="#SourceSelector-171"><span class="linenos">171</span></a>        <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="SourceSelector-226"><a href="#SourceSelector-226"><span class="linenos">226</span></a><span class="nd">@dataclass</span>
+</span><span id="SourceSelector-227"><a href="#SourceSelector-227"><span class="linenos">227</span></a><span class="k">class</span><span class="w"> </span><span class="nc">SourceSelector</span><span class="p">:</span>
+</span><span id="SourceSelector-228"><a href="#SourceSelector-228"><span class="linenos">228</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="SourceSelector-229"><a href="#SourceSelector-229"><span class="linenos">229</span></a><span class="sd">    The UC Table / DataFrame variable / SQL Query picker used by every</span>
+</span><span id="SourceSelector-230"><a href="#SourceSelector-230"><span class="linenos">230</span></a><span class="sd">    Dashlibs UI that reads from Databricks.</span>
+</span><span id="SourceSelector-231"><a href="#SourceSelector-231"><span class="linenos">231</span></a>
+</span><span id="SourceSelector-232"><a href="#SourceSelector-232"><span class="linenos">232</span></a><span class="sd">    Usage::</span>
+</span><span id="SourceSelector-233"><a href="#SourceSelector-233"><span class="linenos">233</span></a><span class="sd">        src = source_selector()</span>
+</span><span id="SourceSelector-234"><a href="#SourceSelector-234"><span class="linenos">234</span></a><span class="sd">        ui = card([src.toggle, src.box, ...])</span>
+</span><span id="SourceSelector-235"><a href="#SourceSelector-235"><span class="linenos">235</span></a><span class="sd">        kind, value = src.value()</span>
+</span><span id="SourceSelector-236"><a href="#SourceSelector-236"><span class="linenos">236</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="SourceSelector-237"><a href="#SourceSelector-237"><span class="linenos">237</span></a>    <span class="n">toggle</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="SourceSelector-238"><a href="#SourceSelector-238"><span class="linenos">238</span></a>    <span class="n">box</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="SourceSelector-239"><a href="#SourceSelector-239"><span class="linenos">239</span></a>    <span class="n">table_input</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="SourceSelector-240"><a href="#SourceSelector-240"><span class="linenos">240</span></a>    <span class="n">df_input</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="SourceSelector-241"><a href="#SourceSelector-241"><span class="linenos">241</span></a>    <span class="n">sql_input</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="SourceSelector-242"><a href="#SourceSelector-242"><span class="linenos">242</span></a>
+</span><span id="SourceSelector-243"><a href="#SourceSelector-243"><span class="linenos">243</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="SourceSelector-244"><a href="#SourceSelector-244"><span class="linenos">244</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns (kind, value) where kind is &#39;table&#39; | &#39;dataframe&#39; | &#39;sql&#39;.&quot;&quot;&quot;</span>
+</span><span id="SourceSelector-245"><a href="#SourceSelector-245"><span class="linenos">245</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;UC Table&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector-246"><a href="#SourceSelector-246"><span class="linenos">246</span></a>            <span class="k">return</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="SourceSelector-247"><a href="#SourceSelector-247"><span class="linenos">247</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector-248"><a href="#SourceSelector-248"><span class="linenos">248</span></a>            <span class="k">return</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="SourceSelector-249"><a href="#SourceSelector-249"><span class="linenos">249</span></a>        <span class="k">return</span> <span class="s2">&quot;sql&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="SourceSelector-250"><a href="#SourceSelector-250"><span class="linenos">250</span></a>
+</span><span id="SourceSelector-251"><a href="#SourceSelector-251"><span class="linenos">251</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">resolve_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="SourceSelector-252"><a href="#SourceSelector-252"><span class="linenos">252</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the selected source to a Spark DataFrame (for direct use in core classes).&quot;&quot;&quot;</span>
+</span><span id="SourceSelector-253"><a href="#SourceSelector-253"><span class="linenos">253</span></a>        <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+</span><span id="SourceSelector-254"><a href="#SourceSelector-254"><span class="linenos">254</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector-255"><a href="#SourceSelector-255"><span class="linenos">255</span></a>            <span class="kn">import</span><span class="w"> </span><span class="nn">IPython</span>
+</span><span id="SourceSelector-256"><a href="#SourceSelector-256"><span class="linenos">256</span></a>            <span class="n">shell</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">get_ipython</span><span class="p">()</span>
+</span><span id="SourceSelector-257"><a href="#SourceSelector-257"><span class="linenos">257</span></a>            <span class="n">df</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">shell</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span id="SourceSelector-258"><a href="#SourceSelector-258"><span class="linenos">258</span></a>            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="SourceSelector-259"><a href="#SourceSelector-259"><span class="linenos">259</span></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variable &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+</span><span id="SourceSelector-260"><a href="#SourceSelector-260"><span class="linenos">260</span></a>            <span class="k">return</span> <span class="n">df</span>
+</span><span id="SourceSelector-261"><a href="#SourceSelector-261"><span class="linenos">261</span></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+</span><span id="SourceSelector-262"><a href="#SourceSelector-262"><span class="linenos">262</span></a>        <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
+</span><span id="SourceSelector-263"><a href="#SourceSelector-263"><span class="linenos">263</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;table&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector-264"><a href="#SourceSelector-264"><span class="linenos">264</span></a>            <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="SourceSelector-265"><a href="#SourceSelector-265"><span class="linenos">265</span></a>        <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -342,13 +387,13 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#SourceSelector.value"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="SourceSelector.value-149"><a href="#SourceSelector.value-149"><span class="linenos">149</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span id="SourceSelector.value-150"><a href="#SourceSelector.value-150"><span class="linenos">150</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns (kind, value) where kind is &#39;table&#39; | &#39;dataframe&#39; | &#39;sql&#39;.&quot;&quot;&quot;</span>
-</span><span id="SourceSelector.value-151"><a href="#SourceSelector.value-151"><span class="linenos">151</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;UC Table&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector.value-152"><a href="#SourceSelector.value-152"><span class="linenos">152</span></a>            <span class="k">return</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="SourceSelector.value-153"><a href="#SourceSelector.value-153"><span class="linenos">153</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector.value-154"><a href="#SourceSelector.value-154"><span class="linenos">154</span></a>            <span class="k">return</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="SourceSelector.value-155"><a href="#SourceSelector.value-155"><span class="linenos">155</span></a>        <span class="k">return</span> <span class="s2">&quot;sql&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="SourceSelector.value-243"><a href="#SourceSelector.value-243"><span class="linenos">243</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="SourceSelector.value-244"><a href="#SourceSelector.value-244"><span class="linenos">244</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns (kind, value) where kind is &#39;table&#39; | &#39;dataframe&#39; | &#39;sql&#39;.&quot;&quot;&quot;</span>
+</span><span id="SourceSelector.value-245"><a href="#SourceSelector.value-245"><span class="linenos">245</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;UC Table&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector.value-246"><a href="#SourceSelector.value-246"><span class="linenos">246</span></a>            <span class="k">return</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="SourceSelector.value-247"><a href="#SourceSelector.value-247"><span class="linenos">247</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector.value-248"><a href="#SourceSelector.value-248"><span class="linenos">248</span></a>            <span class="k">return</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="SourceSelector.value-249"><a href="#SourceSelector.value-249"><span class="linenos">249</span></a>        <span class="k">return</span> <span class="s2">&quot;sql&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_input</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -368,27 +413,114 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#SourceSelector.resolve_df"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="SourceSelector.resolve_df-157"><a href="#SourceSelector.resolve_df-157"><span class="linenos">157</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">resolve_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="SourceSelector.resolve_df-158"><a href="#SourceSelector.resolve_df-158"><span class="linenos">158</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the selected source to a Spark DataFrame (for direct use in core classes).&quot;&quot;&quot;</span>
-</span><span id="SourceSelector.resolve_df-159"><a href="#SourceSelector.resolve_df-159"><span class="linenos">159</span></a>        <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-</span><span id="SourceSelector.resolve_df-160"><a href="#SourceSelector.resolve_df-160"><span class="linenos">160</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector.resolve_df-161"><a href="#SourceSelector.resolve_df-161"><span class="linenos">161</span></a>            <span class="kn">import</span><span class="w"> </span><span class="nn">IPython</span>
-</span><span id="SourceSelector.resolve_df-162"><a href="#SourceSelector.resolve_df-162"><span class="linenos">162</span></a>            <span class="n">shell</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">get_ipython</span><span class="p">()</span>
-</span><span id="SourceSelector.resolve_df-163"><a href="#SourceSelector.resolve_df-163"><span class="linenos">163</span></a>            <span class="n">df</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">shell</span> <span class="k">else</span> <span class="kc">None</span>
-</span><span id="SourceSelector.resolve_df-164"><a href="#SourceSelector.resolve_df-164"><span class="linenos">164</span></a>            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="SourceSelector.resolve_df-165"><a href="#SourceSelector.resolve_df-165"><span class="linenos">165</span></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variable &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
-</span><span id="SourceSelector.resolve_df-166"><a href="#SourceSelector.resolve_df-166"><span class="linenos">166</span></a>            <span class="k">return</span> <span class="n">df</span>
-</span><span id="SourceSelector.resolve_df-167"><a href="#SourceSelector.resolve_df-167"><span class="linenos">167</span></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
-</span><span id="SourceSelector.resolve_df-168"><a href="#SourceSelector.resolve_df-168"><span class="linenos">168</span></a>        <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
-</span><span id="SourceSelector.resolve_df-169"><a href="#SourceSelector.resolve_df-169"><span class="linenos">169</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;table&quot;</span><span class="p">:</span>
-</span><span id="SourceSelector.resolve_df-170"><a href="#SourceSelector.resolve_df-170"><span class="linenos">170</span></a>            <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span id="SourceSelector.resolve_df-171"><a href="#SourceSelector.resolve_df-171"><span class="linenos">171</span></a>        <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="SourceSelector.resolve_df-251"><a href="#SourceSelector.resolve_df-251"><span class="linenos">251</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">resolve_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="SourceSelector.resolve_df-252"><a href="#SourceSelector.resolve_df-252"><span class="linenos">252</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the selected source to a Spark DataFrame (for direct use in core classes).&quot;&quot;&quot;</span>
+</span><span id="SourceSelector.resolve_df-253"><a href="#SourceSelector.resolve_df-253"><span class="linenos">253</span></a>        <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+</span><span id="SourceSelector.resolve_df-254"><a href="#SourceSelector.resolve_df-254"><span class="linenos">254</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;dataframe&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector.resolve_df-255"><a href="#SourceSelector.resolve_df-255"><span class="linenos">255</span></a>            <span class="kn">import</span><span class="w"> </span><span class="nn">IPython</span>
+</span><span id="SourceSelector.resolve_df-256"><a href="#SourceSelector.resolve_df-256"><span class="linenos">256</span></a>            <span class="n">shell</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">get_ipython</span><span class="p">()</span>
+</span><span id="SourceSelector.resolve_df-257"><a href="#SourceSelector.resolve_df-257"><span class="linenos">257</span></a>            <span class="n">df</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">shell</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span id="SourceSelector.resolve_df-258"><a href="#SourceSelector.resolve_df-258"><span class="linenos">258</span></a>            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="SourceSelector.resolve_df-259"><a href="#SourceSelector.resolve_df-259"><span class="linenos">259</span></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variable &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+</span><span id="SourceSelector.resolve_df-260"><a href="#SourceSelector.resolve_df-260"><span class="linenos">260</span></a>            <span class="k">return</span> <span class="n">df</span>
+</span><span id="SourceSelector.resolve_df-261"><a href="#SourceSelector.resolve_df-261"><span class="linenos">261</span></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+</span><span id="SourceSelector.resolve_df-262"><a href="#SourceSelector.resolve_df-262"><span class="linenos">262</span></a>        <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
+</span><span id="SourceSelector.resolve_df-263"><a href="#SourceSelector.resolve_df-263"><span class="linenos">263</span></a>        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;table&quot;</span><span class="p">:</span>
+</span><span id="SourceSelector.resolve_df-264"><a href="#SourceSelector.resolve_df-264"><span class="linenos">264</span></a>            <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="SourceSelector.resolve_df-265"><a href="#SourceSelector.resolve_df-265"><span class="linenos">265</span></a>        <span class="k">return</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Resolve the selected source to a Spark DataFrame (for direct use in core classes).</p>
 </div>
 
+
+                            </div>
+                </section>
+                <section id="EditableTable">
+                            <input id="EditableTable-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator decorator-dataclass">@dataclass</div>
+
+    <span class="def">class</span>
+    <span class="name">EditableTable</span>:
+
+                <label class="view-source-button" for="EditableTable-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#EditableTable"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="EditableTable-329"><a href="#EditableTable-329"><span class="linenos">329</span></a><span class="nd">@dataclass</span>
+</span><span id="EditableTable-330"><a href="#EditableTable-330"><span class="linenos">330</span></a><span class="k">class</span><span class="w"> </span><span class="nc">EditableTable</span><span class="p">:</span>
+</span><span id="EditableTable-331"><a href="#EditableTable-331"><span class="linenos">331</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="EditableTable-332"><a href="#EditableTable-332"><span class="linenos">332</span></a><span class="sd">    An add/remove-row key-value grid — the pattern Databricks itself uses for</span>
+</span><span id="EditableTable-333"><a href="#EditableTable-333"><span class="linenos">333</span></a><span class="sd">    job parameters, cluster tags, and environment variables, instead of a</span>
+</span><span id="EditableTable-334"><a href="#EditableTable-334"><span class="linenos">334</span></a><span class="sd">    single free-text &quot;key=value, key=value&quot; field.</span>
+</span><span id="EditableTable-335"><a href="#EditableTable-335"><span class="linenos">335</span></a>
+</span><span id="EditableTable-336"><a href="#EditableTable-336"><span class="linenos">336</span></a><span class="sd">    Usage::</span>
+</span><span id="EditableTable-337"><a href="#EditableTable-337"><span class="linenos">337</span></a><span class="sd">        tbl = editable_table([&quot;Key&quot;, &quot;Value&quot;], placeholders={&quot;Key&quot;: &quot;AWS_REGION&quot;})</span>
+</span><span id="EditableTable-338"><a href="#EditableTable-338"><span class="linenos">338</span></a><span class="sd">        ui = card([tbl.widget, ...])</span>
+</span><span id="EditableTable-339"><a href="#EditableTable-339"><span class="linenos">339</span></a><span class="sd">        rows = tbl.values()  # [{&quot;Key&quot;: &quot;AWS_REGION&quot;, &quot;Value&quot;: &quot;us-east-1&quot;}, ...]</span>
+</span><span id="EditableTable-340"><a href="#EditableTable-340"><span class="linenos">340</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="EditableTable-341"><a href="#EditableTable-341"><span class="linenos">341</span></a>    <span class="n">widget</span><span class="p">:</span> <span class="nb">object</span>
+</span><span id="EditableTable-342"><a href="#EditableTable-342"><span class="linenos">342</span></a>    <span class="n">add_row</span><span class="p">:</span> <span class="nb">object</span>   <span class="c1"># callable(b=None) -&gt; None, wired as a Button.on_click handler too</span>
+</span><span id="EditableTable-343"><a href="#EditableTable-343"><span class="linenos">343</span></a>    <span class="n">values</span><span class="p">:</span> <span class="nb">object</span>     <span class="c1"># callable() -&gt; list[dict[str, str]]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>An add/remove-row key-value grid — the pattern Databricks itself uses for
+job parameters, cluster tags, and environment variables, instead of a
+single free-text "key=value, key=value" field.</p>
+
+<p>Usage::
+    tbl = editable_table(["Key", "Value"], placeholders={"Key": "AWS_REGION"})
+    ui = card([tbl.widget, ...])
+    rows = tbl.values()  # [{"Key": "AWS_REGION", "Value": "us-east-1"}, ...]</p>
+</div>
+
+
+                            <div id="EditableTable.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">EditableTable</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">widget</span><span class="p">:</span> <span class="nb">object</span>, </span><span class="param"><span class="n">add_row</span><span class="p">:</span> <span class="nb">object</span>, </span><span class="param"><span class="n">values</span><span class="p">:</span> <span class="nb">object</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EditableTable.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="EditableTable.widget" class="classattr">
+                                <div class="attr variable">
+            <span class="name">widget</span><span class="annotation">: object</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EditableTable.widget"></a>
+    
+    
+
+                            </div>
+                            <div id="EditableTable.add_row" class="classattr">
+                                <div class="attr variable">
+            <span class="name">add_row</span><span class="annotation">: object</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EditableTable.add_row"></a>
+    
+    
+
+                            </div>
+                            <div id="EditableTable.values" class="classattr">
+                                <div class="attr variable">
+            <span class="name">values</span><span class="annotation">: object</span>
+
+        
+    </div>
+    <a class="headerlink" href="#EditableTable.values"></a>
+    
+    
 
                             </div>
                 </section>
@@ -403,17 +535,17 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#action_button"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="action_button-194"><a href="#action_button-194"><span class="linenos">194</span></a><span class="k">def</span><span class="w"> </span><span class="nf">action_button</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span><span class="p">,</span> <span class="n">emoji</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-</span><span id="action_button-195"><a href="#action_button-195"><span class="linenos">195</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;style in primary|success|warning|danger|info — matches the datapal-access button variants.&quot;&quot;&quot;</span>
-</span><span id="action_button-196"><a href="#action_button-196"><span class="linenos">196</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
-</span><span id="action_button-197"><a href="#action_button-197"><span class="linenos">197</span></a>    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="action_button-198"><a href="#action_button-198"><span class="linenos">198</span></a>    <span class="n">btn</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;40px&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;0 16px&quot;</span><span class="p">))</span>
-</span><span id="action_button-199"><a href="#action_button-199"><span class="linenos">199</span></a>    <span class="n">btn</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dashui-btn-</span><span class="si">{</span><span class="n">style</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="action_button-200"><a href="#action_button-200"><span class="linenos">200</span></a>    <span class="k">return</span> <span class="n">btn</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="action_button-288"><a href="#action_button-288"><span class="linenos">288</span></a><span class="k">def</span><span class="w"> </span><span class="nf">action_button</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span><span class="p">,</span> <span class="n">emoji</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+</span><span id="action_button-289"><a href="#action_button-289"><span class="linenos">289</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;style in primary|success|warning|danger|info — matches the Databricks button variants.&quot;&quot;&quot;</span>
+</span><span id="action_button-290"><a href="#action_button-290"><span class="linenos">290</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="action_button-291"><a href="#action_button-291"><span class="linenos">291</span></a>    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="action_button-292"><a href="#action_button-292"><span class="linenos">292</span></a>    <span class="n">btn</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;32px&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;0 14px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">))</span>
+</span><span id="action_button-293"><a href="#action_button-293"><span class="linenos">293</span></a>    <span class="n">btn</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dashui-btn-</span><span class="si">{</span><span class="n">style</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="action_button-294"><a href="#action_button-294"><span class="linenos">294</span></a>    <span class="k">return</span> <span class="n">btn</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>style in primary|success|warning|danger|info — matches the datapal-access button variants.</p>
+            <div class="docstring"><p>style in primary|success|warning|danger|info — matches the Databricks button variants.</p>
 </div>
 
 
@@ -423,28 +555,90 @@ Dashlibs UI that reads from Databricks.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">card</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">children</span>, </span><span class="param"><span class="n">padding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;20px&#39;</span></span><span class="return-annotation">):</span></span>
+        <span class="name">card</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">children</span>, </span><span class="param"><span class="n">padding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;16px&#39;</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="card-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#card"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="card-120"><a href="#card-120"><span class="linenos">120</span></a><span class="k">def</span><span class="w"> </span><span class="nf">card</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">padding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;20px&quot;</span><span class="p">):</span>
-</span><span id="card-121"><a href="#card-121"><span class="linenos">121</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Bordered, shadowed VBox container — the outer shell for every launch() UI.&quot;&quot;&quot;</span>
-</span><span id="card-122"><a href="#card-122"><span class="linenos">122</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
-</span><span id="card-123"><a href="#card-123"><span class="linenos">123</span></a>    <span class="k">global</span> <span class="n">_STYLE_INJECTED</span>
-</span><span id="card-124"><a href="#card-124"><span class="linenos">124</span></a>    <span class="n">body</span> <span class="o">=</span> <span class="p">[</span><span class="n">_global_style</span><span class="p">(),</span> <span class="o">*</span><span class="n">children</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">_STYLE_INJECTED</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
-</span><span id="card-125"><a href="#card-125"><span class="linenos">125</span></a>    <span class="n">_STYLE_INJECTED</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="card-126"><a href="#card-126"><span class="linenos">126</span></a>    <span class="n">box</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">))</span>
-</span><span id="card-127"><a href="#card-127"><span class="linenos">127</span></a>    <span class="n">box</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-card&quot;</span><span class="p">)</span>
-</span><span id="card-128"><a href="#card-128"><span class="linenos">128</span></a>    <span class="n">box</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-root&quot;</span><span class="p">)</span>
-</span><span id="card-129"><a href="#card-129"><span class="linenos">129</span></a>    <span class="k">return</span> <span class="n">box</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="card-214"><a href="#card-214"><span class="linenos">214</span></a><span class="k">def</span><span class="w"> </span><span class="nf">card</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">padding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;16px&quot;</span><span class="p">):</span>
+</span><span id="card-215"><a href="#card-215"><span class="linenos">215</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Bordered, shadowed VBox container — the outer shell for every launch() UI.&quot;&quot;&quot;</span>
+</span><span id="card-216"><a href="#card-216"><span class="linenos">216</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="card-217"><a href="#card-217"><span class="linenos">217</span></a>    <span class="k">global</span> <span class="n">_STYLE_INJECTED</span>
+</span><span id="card-218"><a href="#card-218"><span class="linenos">218</span></a>    <span class="n">body</span> <span class="o">=</span> <span class="p">[</span><span class="n">_global_style</span><span class="p">(),</span> <span class="o">*</span><span class="n">children</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">_STYLE_INJECTED</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+</span><span id="card-219"><a href="#card-219"><span class="linenos">219</span></a>    <span class="n">_STYLE_INJECTED</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="card-220"><a href="#card-220"><span class="linenos">220</span></a>    <span class="n">box</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">))</span>
+</span><span id="card-221"><a href="#card-221"><span class="linenos">221</span></a>    <span class="n">box</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-card&quot;</span><span class="p">)</span>
+</span><span id="card-222"><a href="#card-222"><span class="linenos">222</span></a>    <span class="n">box</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-root&quot;</span><span class="p">)</span>
+</span><span id="card-223"><a href="#card-223"><span class="linenos">223</span></a>    <span class="k">return</span> <span class="n">box</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Bordered, shadowed VBox container — the outer shell for every launch() UI.</p>
 </div>
 
+
+                </section>
+                <section id="editable_table">
+                            <input id="editable_table-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">editable_table</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>,</span><span class="param">	<span class="n">placeholders</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">initial_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span></span><span class="return-annotation">) -> <span class="n"><a href="#EditableTable">EditableTable</a></span>:</span></span>
+
+                <label class="view-source-button" for="editable_table-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#editable_table"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="editable_table-346"><a href="#editable_table-346"><span class="linenos">346</span></a><span class="k">def</span><span class="w"> </span><span class="nf">editable_table</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">placeholders</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">initial_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EditableTable</span><span class="p">:</span>
+</span><span id="editable_table-347"><a href="#editable_table-347"><span class="linenos">347</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="editable_table-348"><a href="#editable_table-348"><span class="linenos">348</span></a>    <span class="n">placeholders</span> <span class="o">=</span> <span class="n">placeholders</span> <span class="ow">or</span> <span class="p">{}</span>
+</span><span id="editable_table-349"><a href="#editable_table-349"><span class="linenos">349</span></a>    <span class="n">row_entries</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">object</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># (row_box, {col: Text widget})</span>
+</span><span id="editable_table-350"><a href="#editable_table-350"><span class="linenos">350</span></a>
+</span><span id="editable_table-351"><a href="#editable_table-351"><span class="linenos">351</span></a>    <span class="n">header_row</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span>
+</span><span id="editable_table-352"><a href="#editable_table-352"><span class="linenos">352</span></a>        <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;div class=&#39;dashui-table-header&#39;&gt;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;32px&quot;</span><span class="p">))]</span>
+</span><span id="editable_table-353"><a href="#editable_table-353"><span class="linenos">353</span></a>    <span class="p">)</span>
+</span><span id="editable_table-354"><a href="#editable_table-354"><span class="linenos">354</span></a>    <span class="n">rows_box</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">([])</span>
+</span><span id="editable_table-355"><a href="#editable_table-355"><span class="linenos">355</span></a>
+</span><span id="editable_table-356"><a href="#editable_table-356"><span class="linenos">356</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_make_row</span><span class="p">():</span>
+</span><span id="editable_table-357"><a href="#editable_table-357"><span class="linenos">357</span></a>        <span class="n">cells</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="n">placeholders</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">flex</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">}</span>
+</span><span id="editable_table-358"><a href="#editable_table-358"><span class="linenos">358</span></a>        <span class="n">remove_btn</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;✕&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;32px&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;28px&quot;</span><span class="p">),</span> <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Remove row&quot;</span><span class="p">)</span>
+</span><span id="editable_table-359"><a href="#editable_table-359"><span class="linenos">359</span></a>        <span class="n">remove_btn</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-btn-info&quot;</span><span class="p">)</span>
+</span><span id="editable_table-360"><a href="#editable_table-360"><span class="linenos">360</span></a>        <span class="n">row_box</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">cells</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">remove_btn</span><span class="p">])</span>
+</span><span id="editable_table-361"><a href="#editable_table-361"><span class="linenos">361</span></a>        <span class="n">row_box</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-table-row&quot;</span><span class="p">)</span>
+</span><span id="editable_table-362"><a href="#editable_table-362"><span class="linenos">362</span></a>
+</span><span id="editable_table-363"><a href="#editable_table-363"><span class="linenos">363</span></a>        <span class="k">def</span><span class="w"> </span><span class="nf">on_remove</span><span class="p">(</span><span class="n">_b</span><span class="p">):</span>
+</span><span id="editable_table-364"><a href="#editable_table-364"><span class="linenos">364</span></a>            <span class="n">row_entries</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">rb</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">rb</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">row_entries</span> <span class="k">if</span> <span class="n">rb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">row_box</span><span class="p">]</span>
+</span><span id="editable_table-365"><a href="#editable_table-365"><span class="linenos">365</span></a>            <span class="n">rows_box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">rb</span> <span class="k">for</span> <span class="n">rb</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">row_entries</span><span class="p">)</span>
+</span><span id="editable_table-366"><a href="#editable_table-366"><span class="linenos">366</span></a>
+</span><span id="editable_table-367"><a href="#editable_table-367"><span class="linenos">367</span></a>        <span class="n">remove_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_remove</span><span class="p">)</span>
+</span><span id="editable_table-368"><a href="#editable_table-368"><span class="linenos">368</span></a>        <span class="k">return</span> <span class="n">row_box</span><span class="p">,</span> <span class="n">cells</span>
+</span><span id="editable_table-369"><a href="#editable_table-369"><span class="linenos">369</span></a>
+</span><span id="editable_table-370"><a href="#editable_table-370"><span class="linenos">370</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add_row</span><span class="p">(</span><span class="n">_b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="editable_table-371"><a href="#editable_table-371"><span class="linenos">371</span></a>        <span class="n">row_box</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">_make_row</span><span class="p">()</span>
+</span><span id="editable_table-372"><a href="#editable_table-372"><span class="linenos">372</span></a>        <span class="n">row_entries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">row_box</span><span class="p">,</span> <span class="n">cells</span><span class="p">))</span>
+</span><span id="editable_table-373"><a href="#editable_table-373"><span class="linenos">373</span></a>        <span class="n">rows_box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">rb</span> <span class="k">for</span> <span class="n">rb</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">row_entries</span><span class="p">)</span>
+</span><span id="editable_table-374"><a href="#editable_table-374"><span class="linenos">374</span></a>
+</span><span id="editable_table-375"><a href="#editable_table-375"><span class="linenos">375</span></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">initial_rows</span><span class="p">):</span>
+</span><span id="editable_table-376"><a href="#editable_table-376"><span class="linenos">376</span></a>        <span class="n">add_row</span><span class="p">()</span>
+</span><span id="editable_table-377"><a href="#editable_table-377"><span class="linenos">377</span></a>
+</span><span id="editable_table-378"><a href="#editable_table-378"><span class="linenos">378</span></a>    <span class="n">add_btn</span> <span class="o">=</span> <span class="n">action_button</span><span class="p">(</span><span class="s2">&quot;Add row&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s2">&quot;＋&quot;</span><span class="p">)</span>
+</span><span id="editable_table-379"><a href="#editable_table-379"><span class="linenos">379</span></a>    <span class="n">add_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">add_row</span><span class="p">)</span>
+</span><span id="editable_table-380"><a href="#editable_table-380"><span class="linenos">380</span></a>
+</span><span id="editable_table-381"><a href="#editable_table-381"><span class="linenos">381</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span id="editable_table-382"><a href="#editable_table-382"><span class="linenos">382</span></a>        <span class="k">return</span> <span class="p">[</span>
+</span><span id="editable_table-383"><a href="#editable_table-383"><span class="linenos">383</span></a>            <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">cells</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">}</span>
+</span><span id="editable_table-384"><a href="#editable_table-384"><span class="linenos">384</span></a>            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">cells</span> <span class="ow">in</span> <span class="n">row_entries</span>
+</span><span id="editable_table-385"><a href="#editable_table-385"><span class="linenos">385</span></a>            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">cells</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)</span>
+</span><span id="editable_table-386"><a href="#editable_table-386"><span class="linenos">386</span></a>        <span class="p">]</span>
+</span><span id="editable_table-387"><a href="#editable_table-387"><span class="linenos">387</span></a>
+</span><span id="editable_table-388"><a href="#editable_table-388"><span class="linenos">388</span></a>    <span class="n">table</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">header_row</span><span class="p">,</span> <span class="n">rows_box</span><span class="p">,</span> <span class="n">add_btn</span><span class="p">])</span>
+</span><span id="editable_table-389"><a href="#editable_table-389"><span class="linenos">389</span></a>    <span class="n">table</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-table&quot;</span><span class="p">)</span>
+</span><span id="editable_table-390"><a href="#editable_table-390"><span class="linenos">390</span></a>    <span class="k">return</span> <span class="n">EditableTable</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="n">add_row</span><span class="o">=</span><span class="n">add_row</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>
+</span></pre></div>
+
+
+    
 
                 </section>
                 <section id="header">
@@ -458,17 +652,17 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#header"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="header-95"><a href="#header-95"><span class="linenos"> 95</span></a><span class="k">def</span><span class="w"> </span><span class="nf">header</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">library</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">emoji</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-</span><span id="header-96"><a href="#header-96"><span class="linenos"> 96</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Top banner used at the start of every launch() UI.&quot;&quot;&quot;</span>
-</span><span id="header-97"><a href="#header-97"><span class="linenos"> 97</span></a>    <span class="n">color</span> <span class="o">=</span> <span class="n">accent</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
-</span><span id="header-98"><a href="#header-98"><span class="linenos"> 98</span></a>    <span class="n">sub</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="header-99"><a href="#header-99"><span class="linenos"> 99</span></a>        <span class="sa">f</span><span class="s2">&quot;&lt;div style=&#39;font-size:12px;color:</span><span class="si">{</span><span class="n">MUTED_FOREGROUND</span><span class="si">}</span><span class="s2">;margin-top:2px;&quot;</span>
-</span><span id="header-100"><a href="#header-100"><span class="linenos">100</span></a>        <span class="sa">f</span><span class="s2">&quot;font-family:</span><span class="si">{</span><span class="n">FONT_SANS</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">subtitle</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span>
-</span><span id="header-101"><a href="#header-101"><span class="linenos">101</span></a>    <span class="p">)</span> <span class="k">if</span> <span class="n">subtitle</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-</span><span id="header-102"><a href="#header-102"><span class="linenos">102</span></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span>
-</span><span id="header-103"><a href="#header-103"><span class="linenos">103</span></a>        <span class="sa">f</span><span class="s2">&quot;&lt;h2 style=&#39;color:</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">;margin-bottom:0;font-weight:700;&quot;</span>
-</span><span id="header-104"><a href="#header-104"><span class="linenos">104</span></a>        <span class="sa">f</span><span class="s2">&quot;letter-spacing:-0.01em;font-family:</span><span class="si">{</span><span class="n">FONT_SANS</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/h2&gt;</span><span class="si">{</span><span class="n">sub</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="header-105"><a href="#header-105"><span class="linenos">105</span></a>    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="header-189"><a href="#header-189"><span class="linenos">189</span></a><span class="k">def</span><span class="w"> </span><span class="nf">header</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">library</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">emoji</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+</span><span id="header-190"><a href="#header-190"><span class="linenos">190</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Top banner used at the start of every launch() UI.&quot;&quot;&quot;</span>
+</span><span id="header-191"><a href="#header-191"><span class="linenos">191</span></a>    <span class="n">color</span> <span class="o">=</span> <span class="n">accent</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
+</span><span id="header-192"><a href="#header-192"><span class="linenos">192</span></a>    <span class="n">sub</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="header-193"><a href="#header-193"><span class="linenos">193</span></a>        <span class="sa">f</span><span class="s2">&quot;&lt;div style=&#39;font-size:12px;color:</span><span class="si">{</span><span class="n">MUTED_FOREGROUND</span><span class="si">}</span><span class="s2">;margin-top:2px;&quot;</span>
+</span><span id="header-194"><a href="#header-194"><span class="linenos">194</span></a>        <span class="sa">f</span><span class="s2">&quot;font-family:</span><span class="si">{</span><span class="n">FONT_SANS</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">subtitle</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span>
+</span><span id="header-195"><a href="#header-195"><span class="linenos">195</span></a>    <span class="p">)</span> <span class="k">if</span> <span class="n">subtitle</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+</span><span id="header-196"><a href="#header-196"><span class="linenos">196</span></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span>
+</span><span id="header-197"><a href="#header-197"><span class="linenos">197</span></a>        <span class="sa">f</span><span class="s2">&quot;&lt;h2 style=&#39;color:</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">;margin-bottom:0;font-weight:700;&quot;</span>
+</span><span id="header-198"><a href="#header-198"><span class="linenos">198</span></a>        <span class="sa">f</span><span class="s2">&quot;letter-spacing:-0.01em;font-family:</span><span class="si">{</span><span class="n">FONT_SANS</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/h2&gt;</span><span class="si">{</span><span class="n">sub</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="header-199"><a href="#header-199"><span class="linenos">199</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -488,9 +682,9 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#html"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="html-49"><a href="#html-49"><span class="linenos">49</span></a><span class="k">def</span><span class="w"> </span><span class="nf">html</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="html-50"><a href="#html-50"><span class="linenos">50</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
-</span><span id="html-51"><a href="#html-51"><span class="linenos">51</span></a>    <span class="k">return</span> <span class="n">w</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="html-57"><a href="#html-57"><span class="linenos">57</span></a><span class="k">def</span><span class="w"> </span><span class="nf">html</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="html-58"><a href="#html-58"><span class="linenos">58</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="html-59"><a href="#html-59"><span class="linenos">59</span></a>    <span class="k">return</span> <span class="n">w</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -508,12 +702,12 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#output_panel"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="output_panel-203"><a href="#output_panel-203"><span class="linenos">203</span></a><span class="k">def</span><span class="w"> </span><span class="nf">output_panel</span><span class="p">():</span>
-</span><span id="output_panel-204"><a href="#output_panel-204"><span class="linenos">204</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Standard scrollable output area for run/profile results and errors.&quot;&quot;&quot;</span>
-</span><span id="output_panel-205"><a href="#output_panel-205"><span class="linenos">205</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
-</span><span id="output_panel-206"><a href="#output_panel-206"><span class="linenos">206</span></a>    <span class="n">out</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Output</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;12px&quot;</span><span class="p">))</span>
-</span><span id="output_panel-207"><a href="#output_panel-207"><span class="linenos">207</span></a>    <span class="n">out</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-output&quot;</span><span class="p">)</span>
-</span><span id="output_panel-208"><a href="#output_panel-208"><span class="linenos">208</span></a>    <span class="k">return</span> <span class="n">out</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="output_panel-297"><a href="#output_panel-297"><span class="linenos">297</span></a><span class="k">def</span><span class="w"> </span><span class="nf">output_panel</span><span class="p">():</span>
+</span><span id="output_panel-298"><a href="#output_panel-298"><span class="linenos">298</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Standard scrollable output area for run/profile results and errors.&quot;&quot;&quot;</span>
+</span><span id="output_panel-299"><a href="#output_panel-299"><span class="linenos">299</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="output_panel-300"><a href="#output_panel-300"><span class="linenos">300</span></a>    <span class="n">out</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Output</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;12px&quot;</span><span class="p">))</span>
+</span><span id="output_panel-301"><a href="#output_panel-301"><span class="linenos">301</span></a>    <span class="n">out</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-output&quot;</span><span class="p">)</span>
+</span><span id="output_panel-302"><a href="#output_panel-302"><span class="linenos">302</span></a>    <span class="k">return</span> <span class="n">out</span>
 </span></pre></div>
 
 
@@ -533,28 +727,28 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#running_list"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="running_list-211"><a href="#running_list-211"><span class="linenos">211</span></a><span class="k">def</span><span class="w"> </span><span class="nf">running_list</span><span class="p">(</span><span class="n">formatter</span><span class="p">):</span>
-</span><span id="running_list-212"><a href="#running_list-212"><span class="linenos">212</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="running_list-213"><a href="#running_list-213"><span class="linenos">213</span></a><span class="sd">    A live-updating numbered list display, the pattern used for &#39;added entities&#39;</span>
-</span><span id="running_list-214"><a href="#running_list-214"><span class="linenos">214</span></a><span class="sd">    / &#39;added relationships&#39; style accumulators.</span>
-</span><span id="running_list-215"><a href="#running_list-215"><span class="linenos">215</span></a>
-</span><span id="running_list-216"><a href="#running_list-216"><span class="linenos">216</span></a><span class="sd">    Usage::</span>
-</span><span id="running_list-217"><a href="#running_list-217"><span class="linenos">217</span></a><span class="sd">        items = []</span>
-</span><span id="running_list-218"><a href="#running_list-218"><span class="linenos">218</span></a><span class="sd">        out, render = running_list(lambda i, item: f&quot;{i}. {item[&#39;name&#39;]}&quot;)</span>
-</span><span id="running_list-219"><a href="#running_list-219"><span class="linenos">219</span></a><span class="sd">        items.append({&quot;name&quot;: &quot;Customer&quot;})</span>
-</span><span id="running_list-220"><a href="#running_list-220"><span class="linenos">220</span></a><span class="sd">        render(items)</span>
-</span><span id="running_list-221"><a href="#running_list-221"><span class="linenos">221</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="running_list-222"><a href="#running_list-222"><span class="linenos">222</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
-</span><span id="running_list-223"><a href="#running_list-223"><span class="linenos">223</span></a>    <span class="n">out</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Output</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;8px 12px&quot;</span><span class="p">))</span>
-</span><span id="running_list-224"><a href="#running_list-224"><span class="linenos">224</span></a>    <span class="n">out</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-output&quot;</span><span class="p">)</span>
-</span><span id="running_list-225"><a href="#running_list-225"><span class="linenos">225</span></a>
-</span><span id="running_list-226"><a href="#running_list-226"><span class="linenos">226</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
-</span><span id="running_list-227"><a href="#running_list-227"><span class="linenos">227</span></a>        <span class="k">with</span> <span class="n">out</span><span class="p">:</span>
-</span><span id="running_list-228"><a href="#running_list-228"><span class="linenos">228</span></a>            <span class="n">out</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
-</span><span id="running_list-229"><a href="#running_list-229"><span class="linenos">229</span></a>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="running_list-230"><a href="#running_list-230"><span class="linenos">230</span></a>                <span class="nb">print</span><span class="p">(</span><span class="n">formatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
-</span><span id="running_list-231"><a href="#running_list-231"><span class="linenos">231</span></a>
-</span><span id="running_list-232"><a href="#running_list-232"><span class="linenos">232</span></a>    <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">render</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="running_list-305"><a href="#running_list-305"><span class="linenos">305</span></a><span class="k">def</span><span class="w"> </span><span class="nf">running_list</span><span class="p">(</span><span class="n">formatter</span><span class="p">):</span>
+</span><span id="running_list-306"><a href="#running_list-306"><span class="linenos">306</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="running_list-307"><a href="#running_list-307"><span class="linenos">307</span></a><span class="sd">    A live-updating numbered list display, the pattern used for &#39;added entities&#39;</span>
+</span><span id="running_list-308"><a href="#running_list-308"><span class="linenos">308</span></a><span class="sd">    / &#39;added relationships&#39; style accumulators.</span>
+</span><span id="running_list-309"><a href="#running_list-309"><span class="linenos">309</span></a>
+</span><span id="running_list-310"><a href="#running_list-310"><span class="linenos">310</span></a><span class="sd">    Usage::</span>
+</span><span id="running_list-311"><a href="#running_list-311"><span class="linenos">311</span></a><span class="sd">        items = []</span>
+</span><span id="running_list-312"><a href="#running_list-312"><span class="linenos">312</span></a><span class="sd">        out, render = running_list(lambda i, item: f&quot;{i}. {item[&#39;name&#39;]}&quot;)</span>
+</span><span id="running_list-313"><a href="#running_list-313"><span class="linenos">313</span></a><span class="sd">        items.append({&quot;name&quot;: &quot;Customer&quot;})</span>
+</span><span id="running_list-314"><a href="#running_list-314"><span class="linenos">314</span></a><span class="sd">        render(items)</span>
+</span><span id="running_list-315"><a href="#running_list-315"><span class="linenos">315</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="running_list-316"><a href="#running_list-316"><span class="linenos">316</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="running_list-317"><a href="#running_list-317"><span class="linenos">317</span></a>    <span class="n">out</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Output</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;8px 12px&quot;</span><span class="p">))</span>
+</span><span id="running_list-318"><a href="#running_list-318"><span class="linenos">318</span></a>    <span class="n">out</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;dashui-output&quot;</span><span class="p">)</span>
+</span><span id="running_list-319"><a href="#running_list-319"><span class="linenos">319</span></a>
+</span><span id="running_list-320"><a href="#running_list-320"><span class="linenos">320</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+</span><span id="running_list-321"><a href="#running_list-321"><span class="linenos">321</span></a>        <span class="k">with</span> <span class="n">out</span><span class="p">:</span>
+</span><span id="running_list-322"><a href="#running_list-322"><span class="linenos">322</span></a>            <span class="n">out</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
+</span><span id="running_list-323"><a href="#running_list-323"><span class="linenos">323</span></a>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="running_list-324"><a href="#running_list-324"><span class="linenos">324</span></a>                <span class="nb">print</span><span class="p">(</span><span class="n">formatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
+</span><span id="running_list-325"><a href="#running_list-325"><span class="linenos">325</span></a>
+</span><span id="running_list-326"><a href="#running_list-326"><span class="linenos">326</span></a>    <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">render</span>
 </span></pre></div>
 
 
@@ -581,9 +775,9 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#section"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="section-108"><a href="#section-108"><span class="linenos">108</span></a><span class="k">def</span><span class="w"> </span><span class="nf">section</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="section-109"><a href="#section-109"><span class="linenos">109</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Step/section divider, styled like the datapal-access card label convention.&quot;&quot;&quot;</span>
-</span><span id="section-110"><a href="#section-110"><span class="linenos">110</span></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;div class=&#39;dashui-section&#39;&gt;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="section-202"><a href="#section-202"><span class="linenos">202</span></a><span class="k">def</span><span class="w"> </span><span class="nf">section</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="section-203"><a href="#section-203"><span class="linenos">203</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Step/section divider, styled like the datapal-access card label convention.&quot;&quot;&quot;</span>
+</span><span id="section-204"><a href="#section-204"><span class="linenos">204</span></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;div class=&#39;dashui-section&#39;&gt;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -603,24 +797,24 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#source_selector"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="source_selector-174"><a href="#source_selector-174"><span class="linenos">174</span></a><span class="k">def</span><span class="w"> </span><span class="nf">source_selector</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Source:&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SourceSelector</span><span class="p">:</span>
-</span><span id="source_selector-175"><a href="#source_selector-175"><span class="linenos">175</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
-</span><span id="source_selector-176"><a href="#source_selector-176"><span class="linenos">176</span></a>    <span class="n">toggle</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;UC Table&quot;</span><span class="p">,</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">,</span> <span class="s2">&quot;SQL Query&quot;</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-</span><span id="source_selector-177"><a href="#source_selector-177"><span class="linenos">177</span></a>    <span class="n">table_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;catalog.schema.table&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Table:&quot;</span><span class="p">)</span>
-</span><span id="source_selector-178"><a href="#source_selector-178"><span class="linenos">178</span></a>    <span class="n">df_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;df&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Variable:&quot;</span><span class="p">)</span>
-</span><span id="source_selector-179"><a href="#source_selector-179"><span class="linenos">179</span></a>    <span class="n">sql_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Textarea</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;SELECT * FROM ...&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;SQL:&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</span><span id="source_selector-180"><a href="#source_selector-180"><span class="linenos">180</span></a>    <span class="n">box</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">table_input</span><span class="p">])</span>
-</span><span id="source_selector-181"><a href="#source_selector-181"><span class="linenos">181</span></a>
-</span><span id="source_selector-182"><a href="#source_selector-182"><span class="linenos">182</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_change</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
-</span><span id="source_selector-183"><a href="#source_selector-183"><span class="linenos">183</span></a>        <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;UC Table&quot;</span><span class="p">:</span>
-</span><span id="source_selector-184"><a href="#source_selector-184"><span class="linenos">184</span></a>            <span class="n">box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">table_input</span><span class="p">]</span>
-</span><span id="source_selector-185"><a href="#source_selector-185"><span class="linenos">185</span></a>        <span class="k">elif</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">:</span>
-</span><span id="source_selector-186"><a href="#source_selector-186"><span class="linenos">186</span></a>            <span class="n">box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_input</span><span class="p">]</span>
-</span><span id="source_selector-187"><a href="#source_selector-187"><span class="linenos">187</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="source_selector-188"><a href="#source_selector-188"><span class="linenos">188</span></a>            <span class="n">box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">sql_input</span><span class="p">]</span>
-</span><span id="source_selector-189"><a href="#source_selector-189"><span class="linenos">189</span></a>
-</span><span id="source_selector-190"><a href="#source_selector-190"><span class="linenos">190</span></a>    <span class="n">toggle</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">on_change</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
-</span><span id="source_selector-191"><a href="#source_selector-191"><span class="linenos">191</span></a>    <span class="k">return</span> <span class="n">SourceSelector</span><span class="p">(</span><span class="n">toggle</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">table_input</span><span class="p">,</span> <span class="n">df_input</span><span class="p">,</span> <span class="n">sql_input</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="source_selector-268"><a href="#source_selector-268"><span class="linenos">268</span></a><span class="k">def</span><span class="w"> </span><span class="nf">source_selector</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Source:&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SourceSelector</span><span class="p">:</span>
+</span><span id="source_selector-269"><a href="#source_selector-269"><span class="linenos">269</span></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">_require_widgets</span><span class="p">()</span>
+</span><span id="source_selector-270"><a href="#source_selector-270"><span class="linenos">270</span></a>    <span class="n">toggle</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;UC Table&quot;</span><span class="p">,</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">,</span> <span class="s2">&quot;SQL Query&quot;</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+</span><span id="source_selector-271"><a href="#source_selector-271"><span class="linenos">271</span></a>    <span class="n">table_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;catalog.schema.table&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Table:&quot;</span><span class="p">)</span>
+</span><span id="source_selector-272"><a href="#source_selector-272"><span class="linenos">272</span></a>    <span class="n">df_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;df&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Variable:&quot;</span><span class="p">)</span>
+</span><span id="source_selector-273"><a href="#source_selector-273"><span class="linenos">273</span></a>    <span class="n">sql_input</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Textarea</span><span class="p">(</span><span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;SELECT * FROM ...&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;SQL:&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="source_selector-274"><a href="#source_selector-274"><span class="linenos">274</span></a>    <span class="n">box</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">table_input</span><span class="p">])</span>
+</span><span id="source_selector-275"><a href="#source_selector-275"><span class="linenos">275</span></a>
+</span><span id="source_selector-276"><a href="#source_selector-276"><span class="linenos">276</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_change</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
+</span><span id="source_selector-277"><a href="#source_selector-277"><span class="linenos">277</span></a>        <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;UC Table&quot;</span><span class="p">:</span>
+</span><span id="source_selector-278"><a href="#source_selector-278"><span class="linenos">278</span></a>            <span class="n">box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">table_input</span><span class="p">]</span>
+</span><span id="source_selector-279"><a href="#source_selector-279"><span class="linenos">279</span></a>        <span class="k">elif</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;DataFrame variable&quot;</span><span class="p">:</span>
+</span><span id="source_selector-280"><a href="#source_selector-280"><span class="linenos">280</span></a>            <span class="n">box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_input</span><span class="p">]</span>
+</span><span id="source_selector-281"><a href="#source_selector-281"><span class="linenos">281</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="source_selector-282"><a href="#source_selector-282"><span class="linenos">282</span></a>            <span class="n">box</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">sql_input</span><span class="p">]</span>
+</span><span id="source_selector-283"><a href="#source_selector-283"><span class="linenos">283</span></a>
+</span><span id="source_selector-284"><a href="#source_selector-284"><span class="linenos">284</span></a>    <span class="n">toggle</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">on_change</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+</span><span id="source_selector-285"><a href="#source_selector-285"><span class="linenos">285</span></a>    <span class="k">return</span> <span class="n">SourceSelector</span><span class="p">(</span><span class="n">toggle</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">table_input</span><span class="p">,</span> <span class="n">df_input</span><span class="p">,</span> <span class="n">sql_input</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -638,11 +832,11 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#status_line"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="status_line-113"><a href="#status_line-113"><span class="linenos">113</span></a><span class="k">def</span><span class="w"> </span><span class="nf">status_line</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;info&quot;</span><span class="p">):</span>
-</span><span id="status_line-114"><a href="#status_line-114"><span class="linenos">114</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;One-line colored status message: kind in success|error|warning|info.&quot;&quot;&quot;</span>
-</span><span id="status_line-115"><a href="#status_line-115"><span class="linenos">115</span></a>    <span class="n">color</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">SUCCESS</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">DANGER</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="n">WARNING</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="n">MUTED_FOREGROUND</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">MUTED_FOREGROUND</span><span class="p">)</span>
-</span><span id="status_line-116"><a href="#status_line-116"><span class="linenos">116</span></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;✅&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;❌&quot;</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="s2">&quot;⚠️&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;ℹ️&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span id="status_line-117"><a href="#status_line-117"><span class="linenos">117</span></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;color:</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">;font-family:</span><span class="si">{</span><span class="n">FONT_SANS</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&lt;/span&gt;&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="status_line-207"><a href="#status_line-207"><span class="linenos">207</span></a><span class="k">def</span><span class="w"> </span><span class="nf">status_line</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;info&quot;</span><span class="p">):</span>
+</span><span id="status_line-208"><a href="#status_line-208"><span class="linenos">208</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;One-line colored status message: kind in success|error|warning|info.&quot;&quot;&quot;</span>
+</span><span id="status_line-209"><a href="#status_line-209"><span class="linenos">209</span></a>    <span class="n">color</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">SUCCESS</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">DANGER</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="n">WARNING</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="n">MUTED_FOREGROUND</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">MUTED_FOREGROUND</span><span class="p">)</span>
+</span><span id="status_line-210"><a href="#status_line-210"><span class="linenos">210</span></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;✅&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;❌&quot;</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="s2">&quot;⚠️&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;ℹ️&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span id="status_line-211"><a href="#status_line-211"><span class="linenos">211</span></a>    <span class="k">return</span> <span class="n">html</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;color:</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">;font-family:</span><span class="si">{</span><span class="n">FONT_SANS</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&lt;/span&gt;&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -711,9 +905,9 @@ Dashlibs UI that reads from Databricks.</p>
 
     </div>
     <a class="headerlink" href="#accent"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="accent-57"><a href="#accent-57"><span class="linenos">57</span></a><span class="k">def</span><span class="w"> </span><span class="nf">accent</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="accent-58"><a href="#accent-58"><span class="linenos">58</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up the accent color for a Dashlibs package name (e.g. &#39;dashsynthetic&#39;).&quot;&quot;&quot;</span>
-</span><span id="accent-59"><a href="#accent-59"><span class="linenos">59</span></a>    <span class="k">return</span> <span class="n">ACCENTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">ACCENTS</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="accent-72"><a href="#accent-72"><span class="linenos">72</span></a><span class="k">def</span><span class="w"> </span><span class="nf">accent</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="accent-73"><a href="#accent-73"><span class="linenos">73</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up the accent color for a Dashlibs package name (e.g. &#39;dashsynthetic&#39;).&quot;&quot;&quot;</span>
+</span><span id="accent-74"><a href="#accent-74"><span class="linenos">74</span></a>    <span class="k">return</span> <span class="n">ACCENTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">ACCENTS</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -725,7 +919,7 @@ Dashlibs UI that reads from Databricks.</p>
                 <section id="PRIMARY">
                     <div class="attr variable">
             <span class="name">PRIMARY</span>        =
-<span class="default_value">&#39;#2A9D90&#39;</span>
+<span class="default_value">&#39;#FF3621&#39;</span>
 
         
     </div>
@@ -737,7 +931,7 @@ Dashlibs UI that reads from Databricks.</p>
                 <section id="SUCCESS">
                     <div class="attr variable">
             <span class="name">SUCCESS</span>        =
-<span class="default_value">&#39;#29A36A&#39;</span>
+<span class="default_value">&#39;#2E7D32&#39;</span>
 
         
     </div>
@@ -749,7 +943,7 @@ Dashlibs UI that reads from Databricks.</p>
                 <section id="DANGER">
                     <div class="attr variable">
             <span class="name">DANGER</span>        =
-<span class="default_value">&#39;#DC2828&#39;</span>
+<span class="default_value">&#39;#C62828&#39;</span>
 
         
     </div>
@@ -761,7 +955,7 @@ Dashlibs UI that reads from Databricks.</p>
                 <section id="WARNING">
                     <div class="attr variable">
             <span class="name">WARNING</span>        =
-<span class="default_value">&#39;#F59F0A&#39;</span>
+<span class="default_value">&#39;#B36B00&#39;</span>
 
         
     </div>
@@ -770,14 +964,38 @@ Dashlibs UI that reads from Databricks.</p>
     
 
                 </section>
+                <section id="INFO">
+                    <div class="attr variable">
+            <span class="name">INFO</span>        =
+<span class="default_value">&#39;#0E6BA8&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#INFO"></a>
+    
+    
+
+                </section>
                 <section id="BORDER">
                     <div class="attr variable">
             <span class="name">BORDER</span>        =
-<span class="default_value">&#39;#DAE0E7&#39;</span>
+<span class="default_value">&#39;#DCE0E2&#39;</span>
 
         
     </div>
     <a class="headerlink" href="#BORDER"></a>
+    
+    
+
+                </section>
+                <section id="BORDER_STRONG">
+                    <div class="attr variable">
+            <span class="name">BORDER_STRONG</span>        =
+<span class="default_value">&#39;#C7CCD1&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#BORDER_STRONG"></a>
     
     
 
@@ -797,7 +1015,7 @@ Dashlibs UI that reads from Databricks.</p>
                 <section id="MUTED">
                     <div class="attr variable">
             <span class="name">MUTED</span>        =
-<span class="default_value">&#39;#F0F2F4&#39;</span>
+<span class="default_value">&#39;#F3F4F5&#39;</span>
 
         
     </div>
@@ -806,10 +1024,34 @@ Dashlibs UI that reads from Databricks.</p>
     
 
                 </section>
+                <section id="ACCENT_BG">
+                    <div class="attr variable">
+            <span class="name">ACCENT_BG</span>        =
+<span class="default_value">&#39;#FFF1EC&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#ACCENT_BG"></a>
+    
+    
+
+                </section>
+                <section id="ACCENT_FG">
+                    <div class="attr variable">
+            <span class="name">ACCENT_FG</span>        =
+<span class="default_value">&#39;#B33B1E&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#ACCENT_FG"></a>
+    
+    
+
+                </section>
                 <section id="FONT_SANS">
                     <div class="attr variable">
             <span class="name">FONT_SANS</span>        =
-<span class="default_value">&#34;&#39;IBM Plex Sans&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, sans-serif&#34;</span>
+<span class="default_value">&#34;&#39;Inter&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, sans-serif&#34;</span>
 
         
     </div>
@@ -821,7 +1063,7 @@ Dashlibs UI that reads from Databricks.</p>
                 <section id="FONT_MONO">
                     <div class="attr variable">
             <span class="name">FONT_MONO</span>        =
-<span class="default_value">&#34;&#39;IBM Plex Mono&#39;, &#39;SFMono-Regular&#39;, Consolas, monospace&#34;</span>
+<span class="default_value">&#34;&#39;Roboto Mono&#39;, &#39;SFMono-Regular&#39;, Consolas, monospace&#34;</span>
 
         
     </div>
