@@ -112,3 +112,46 @@ def test_editable_table_remove_row_button():
     remove_btn = first_row.children[-1]
     remove_btn.click()
     assert len(tbl.widget.children[1].children) == 1
+
+
+def test_env_setup_panel_defaults_to_cwd(tmp_path, monkeypatch):
+    import dashui
+
+    monkeypatch.setenv("HOME", str(tmp_path / "home"))
+    (tmp_path / "home").mkdir()
+    workdir = tmp_path / "notebook_dir"
+    workdir.mkdir()
+    monkeypatch.chdir(workdir)
+
+    env = dashui.env_setup_panel("dashtest")
+    assert env.values()["config_dir"] == str(workdir)
+
+
+def test_env_setup_panel_save_persists_and_is_read_back(tmp_path, monkeypatch):
+    import dashui
+
+    monkeypatch.setenv("HOME", str(tmp_path / "home"))
+    (tmp_path / "home").mkdir()
+    monkeypatch.chdir(tmp_path)
+
+    env = dashui.env_setup_panel("dashtest", extra_fields={"Default catalog": "main"})
+    dir_input = env.widget.children[1]
+    dir_input.value = str(tmp_path / "chosen_dir")
+
+    save_btn = env.widget.children[-2].children[0]
+    save_btn.click()
+
+    from dashui.persistence import get_config_dir
+    assert get_config_dir("dashtest") == str(tmp_path / "chosen_dir")
+
+
+def test_env_setup_panel_extra_fields_round_trip(tmp_path, monkeypatch):
+    import dashui
+
+    monkeypatch.setenv("HOME", str(tmp_path / "home"))
+    (tmp_path / "home").mkdir()
+    monkeypatch.chdir(tmp_path)
+
+    env = dashui.env_setup_panel("dashtest", extra_fields={"Default catalog": "main"})
+    values = env.values()
+    assert "Default catalog" in values
