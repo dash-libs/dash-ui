@@ -397,3 +397,86 @@ def editable_table(columns: list[str], placeholders: dict[str, str] | None = Non
     table = w.VBox([header_row, rows_box, add_btn])
     table.add_class("dashui-table")
     return EditableTable(widget=table, add_row=add_row, values=values)
+
+
+def env_setup_panel(library: str, extra_fields: dict | None = None):
+    """
+    A ready-to-embed "Environment Setup" panel: where should this package's
+    configs live? Defaults to the notebook's current working directory;
+    Save remembers a different directory (e.g. a Workspace path or Volume)
+    for every future session, across notebooks.
+
+    `extra_fields` is `{label: placeholder}` for any library-specific
+    defaults (e.g. {"Default catalog": "main"}) — saved alongside the
+    directory choice and available via the returned `values()`.
+
+    Usage::
+        env = dashui.env_setup_panel("dashingest", extra_fields={"Default catalog": "main"})
+        ui = card([..., env.widget, ...])
+        settings = env.values()  # {"config_dir": ..., "Default catalog": ...}
+    """
+    from dashui.persistence import get_config_dir, load_config, save_config, set_config_dir
+
+    w = _require_widgets()
+    extra_fields = extra_fields or {}
+    saved = load_config(library, name="env")
+
+    dir_input = w.Text(
+        description="Config directory:",
+        value=saved.get("config_dir", get_config_dir(library)),
+        placeholder=get_config_dir(library),
+        layout=w.Layout(width="420px"),
+    )
+    extra_inputs = {
+        label: w.Text(description=f"{label}:", value=saved.get(label, ""), placeholder=placeholder)
+        for label, placeholder in extra_fields.items()
+    }
+
+    save_btn = action_button("Save", style="primary")
+    reload_btn = action_button("Reload", style="info")
+    status = html(f"<span style='font-size:12px;color:{MUTED_FOREGROUND}'>Currently using: <code>{get_config_dir(library)}</code></span>")
+
+    def _collect() -> dict:
+        return {"config_dir": dir_input.value.strip() or get_config_dir(library),
+                **{label: field.value for label, field in extra_inputs.items()}}
+
+    def _on_save(_b):
+        config = _collect()
+        set_config_dir(library, config["config_dir"])
+        path = save_config(library, config, name="env")
+        status.value = f"<span style='font-size:12px;color:{SUCCESS}'>Saved — settings will be read from <code>{path}</code> in future sessions.</span>"
+
+    def _on_reload(_b):
+        current = load_config(library, name="env")
+        dir_input.value = current.get("config_dir", get_config_dir(library))
+        for label, field in extra_inputs.items():
+            field.value = current.get(label, "")
+        status.value = f"<span style='font-size:12px;color:{MUTED_FOREGROUND}'>Reloaded from <code>{config_path_display(library)}</code>.</span>"
+
+    save_btn.on_click(_on_save)
+    reload_btn.on_click(_on_reload)
+
+    panel = w.VBox([
+        html(
+            f"<div style='font-size:12px;color:{MUTED_FOREGROUND};margin-bottom:4px'>"
+            "Where should this package's configs be read/written? Leave as-is to use "
+            "the notebook's current working directory — nothing here is required."
+            "</div>"
+        ),
+        dir_input,
+        *extra_inputs.values(),
+        w.HBox([save_btn, reload_btn]),
+        status,
+    ])
+    return EnvSetupPanel(widget=panel, values=_collect)
+
+
+def config_path_display(library: str) -> str:
+    from dashui.persistence import config_path
+    return config_path(library, name="env")
+
+
+@dataclass
+class EnvSetupPanel:
+    widget: object
+    values: object  # callable() -> dict
